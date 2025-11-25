@@ -1,0 +1,36 @@
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+debug.log
+error_log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Old versions
+old_version/
+
+# Node modules (if any)
+node_modules/
+package-lock.json
+
+# Composer
+vendor/
+composer.lock

@@ -1,0 +1,184 @@
+/* YAP Plugin Admin Styles */
+
+/* Hide WordPress update notice - ULTRA AGGRESSIVE with JavaScript backup */
+/* Target all possible selectors */
+.update-nag,
+.notice.update-nag,
+.notice-warning.update-nag,
+div.update-nag,
+div.notice.update-nag,
+div.notice.notice-warning.update-nag,
+div.notice.notice-warning.update-nag.inline,
+.update-nag.inline,
+.wrap > .update-nag,
+#wpbody-content > .update-nag,
+#wpbody-content .update-nag,
+body[class*="yap"] .update-nag,
+body.admin_page_yap-edit-group .update-nag,
+.admin_page_yap-edit-group .update-nag,
+[class*="yap"] .update-nag {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    clip: rect(0,0,0,0) !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* Force hide update notice with JavaScript backup */
+/* This runs after CSS to ensure notice is hidden */
+
+/* Nested group styling */
+.nested-group {
+    animation: slideIn 0.3s ease-out;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form improvements */
+.yap-custom-fields .form-table th {
+    width: 200px;
+    font-weight: 600;
+}
+
+.yap-custom-fields .regular-text {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Nested field indicators */
+.nested-group h2,
+.nested-group h3,
+.nested-group h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Add field section */
+.nested-group .form-table {
+    margin: 0;
+}
+
+.nested-group .button {
+    margin-top: 10px;
+}
+
+/* Code display */
+.notice pre {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    border-radius: 3px;
+    margin: 10px 0;
+}
+
+.yap-code-box {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+    clear: both;
+}
+
+/* Add field form in nested groups */
+.nested-add-field-form {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border: 2px dashed #0073aa;
+    border-radius: 5px;
+    clear: both;
+}
+
+.nested-add-field-form h4 {
+    margin-top: 0;
+    color: #0073aa;
+}
+
+/* Metabox styling */
+.yap-metabox-field {
+    margin-bottom: 15px;
+}
+
+.yap-metabox-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.yap-metabox-field input[type="text"],
+.yap-metabox-field textarea,
+.yap-metabox-field select {
+    width: 100%;
+}
+
+.yap-metabox-field textarea {
+    min-height: 100px;
+}
+
+/* Depth indicators */
+.nested-group[data-depth="1"] {
+    border-left-color: #0073aa;
+}
+
+.nested-group[data-depth="2"] {
+    border-left-color: #00a0d2;
+}
+
+.nested-group[data-depth="3"] {
+    border-left-color: #46b450;
+}
+
+/* Table improvements */
+.yap-custom-fields table th,
+.yap-custom-fields table td {
+    padding: 10px;
+}
+
+.yap-custom-fields table input[type="text"] {
+    width: 100%;
+}
+
+/* Button improvements */
+.add-nested-field .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.yap-upload-button {
+    margin-top: 5px;
+}
+
+.yap-image-preview {
+    margin-top: 10px;
+    max-width: 150px;
+    display: block;
+}
+
+.yap-image-field-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.yap-image-field-wrapper input {
+    flex: 1;
+}
