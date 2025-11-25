@@ -11,6 +11,31 @@ function yap_edit_group_page_html() {
 
     global $wpdb;
     $table_name = sanitize_text_field($_GET['table']);
+    
+    // 🚨 BLOKADA: Nie pozwalaj edytować tabel _data bezpośrednio!
+    if (strpos($table_name, '_data') !== false) {
+        ?>
+        <div class="wrap">
+            <h1>❌ Błąd: Nieprawidłowa Tabela</h1>
+            <div class="notice notice-error">
+                <p><strong>Nie można edytować tabeli DATA bezpośrednio!</strong></p>
+                <p>Tabela <code><?php echo esc_html($table_name); ?></code> przechowuje wartości pól przypisane do postów.</p>
+                <p>Aby zarządzać polami:</p>
+                <ul>
+                    <li>✏️ Edytuj odpowiednią tabelę PATTERN (definicje pól)</li>
+                    <li>📝 Edytuj wartości pól bezpośrednio w postach WordPress</li>
+                </ul>
+                <p>
+                    <a href="<?php echo admin_url('admin.php?page=yap'); ?>" class="button button-primary">
+                        ← Powrót do Listy Grup
+                    </a>
+                </p>
+            </div>
+        </div>
+        <?php
+        return; // Zatrzymaj dalsze przetwarzanie
+    }
+    
     $fields = $wpdb->get_results("SELECT * FROM $table_name");
 
     if (isset($_POST['yap_update_group']) && !empty($_POST['field_id']) && is_array($_POST['field_id'])) {

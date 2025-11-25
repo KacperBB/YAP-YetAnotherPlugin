@@ -7,14 +7,16 @@ require_once plugin_dir_path(__FILE__) . 'admin/admin-edit-page.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-group-page.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-menu.php';
 require_once plugin_dir_path(__FILE__) . 'admin/admin-page.php';
+require_once plugin_dir_path(__FILE__) . 'admin/ajax_requests/ajax-refresh-groups.php';
+require_once plugin_dir_path(__FILE__) . 'admin/ajax_requests/ajax-delete-group.php';
 
 function yap_admin_enqueue_scripts($hook) {
     // ZAWSZE ładuj skrypty na stronach admin - prostsze rozwiązanie
     error_log("🔵 yap_admin_enqueue_scripts called for hook: " . $hook);
     error_log("🔵 GET page parameter: " . ($_GET['page'] ?? 'NOT SET'));
     
-    wp_enqueue_script('yap-admin-js', plugin_dir_url(__FILE__) . 'js/admin/admin.js', ['jquery'], '1.0.4', true);
-    wp_enqueue_style('yap-admin-css', plugin_dir_url(__FILE__) . 'css/admin/admin-style.css', [], '1.0.4');
+    wp_enqueue_script('yap-admin-js', plugin_dir_url(__FILE__) . 'js/admin/admin.js', ['jquery'], '1.0.6', true);
+    wp_enqueue_style('yap-admin-css', plugin_dir_url(__FILE__) . 'css/admin/admin-style.css', [], '1.0.6');
     
     // Enqueue WordPress media uploader on YAP pages AND post edit pages
     if (strpos($hook, 'yap') !== false || strpos($hook, 'post') !== false) {

@@ -1,44 +1,203 @@
-/* YAP Plugin Admin Styles */
+/* ============================================
+   YAP Plugin - Modern Minimalist Admin Styles
+   ============================================ */
 
-/* Hide WordPress update notice - ULTRA AGGRESSIVE with JavaScript backup */
-/* Target all possible selectors */
-.update-nag,
-.notice.update-nag,
-.notice-warning.update-nag,
-div.update-nag,
-div.notice.update-nag,
-div.notice.notice-warning.update-nag,
-div.notice.notice-warning.update-nag.inline,
-.update-nag.inline,
-.wrap > .update-nag,
-#wpbody-content > .update-nag,
-#wpbody-content .update-nag,
-body[class*="yap"] .update-nag,
-body.admin_page_yap-edit-group .update-nag,
-.admin_page_yap-edit-group .update-nag,
-[class*="yap"] .update-nag {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    max-height: 0 !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    clip: rect(0,0,0,0) !important;
-    position: absolute !important;
-    left: -9999px !important;
+:root {
+    --yap-primary: #667eea;
+    --yap-primary-dark: #5568d3;
+    --yap-primary-light: #7c94f5;
+    --yap-success: #48bb78;
+    --yap-danger: #f56565;
+    --yap-warning: #ed8936;
+    --yap-gray-50: #f9fafb;
+    --yap-gray-100: #f3f4f6;
+    --yap-gray-200: #e5e7eb;
+    --yap-gray-300: #d1d5db;
+    --yap-gray-600: #4b5563;
+    --yap-gray-700: #374151;
+    --yap-gray-900: #111827;
+    --yap-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --yap-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --yap-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --yap-radius: 8px;
+    --yap-radius-lg: 12px;
 }
 
-/* Force hide update notice with JavaScript backup */
-/* This runs after CSS to ensure notice is hidden */
+/* ============================================
+   Global Styles - SCOPED TO YAP PAGES ONLY
+   ============================================ */
+.yap-admin-page h1,
+body.toplevel_page_yap .wrap h1,
+body.admin_page_yap-edit-group .wrap h1,
+body.admin_page_yap-groups .wrap h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--yap-gray-900);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-/* Nested group styling */
-.nested-group {
-    animation: slideIn 0.3s ease-out;
+.yap-admin-page h1::before,
+body.toplevel_page_yap .wrap h1::before {
+    content: "🎨";
+    font-size: 32px;
+}
+
+/* Hide WordPress notices - ONLY ON YAP PAGES */
+body.toplevel_page_yap .update-nag,
+body.admin_page_yap-edit-group .update-nag,
+body.toplevel_page_yap .notice.update-nag,
+body.admin_page_yap-edit-group .notice.update-nag {
+    display: none !important;
+}
+
+/* ============================================
+   Cards & Containers
+   ============================================ */
+.yap-card {
+    background: white;
+    border-radius: var(--yap-radius-lg);
+    box-shadow: var(--yap-shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--yap-gray-200);
+    transition: all 0.2s ease;
+}
+
+.yap-card:hover {
+    box-shadow: var(--yap-shadow-lg);
+    transform: translateY(-2px);
+}
+
+.yap-card-header {
     margin-bottom: 20px;
-    position: relative;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--yap-gray-100);
+}
+
+.yap-card-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--yap-gray-900);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ============================================
+   Form Styling - SCOPED
+   ============================================ */
+.yap-admin-page .form-table,
+body.admin_page_yap-edit-group .form-table {
+    background: white;
+    border-radius: var(--yap-radius);
+}
+
+.yap-admin-page .form-table th,
+body.admin_page_yap-edit-group .form-table th {
+    font-weight: 600;
+    color: var(--yap-gray-700);
+    padding: 16px !important;
+    width: 220px;
+}
+
+.yap-admin-page .form-table td,
+body.admin_page_yap-edit-group .form-table td {
+    padding: 16px !important;
+}
+
+.yap-admin-page .form-table input[type="text"],
+.yap-admin-page .form-table input[type="number"],
+.yap-admin-page .form-table textarea,
+.yap-admin-page .form-table select,
+body.admin_page_yap-edit-group .form-table input[type="text"],
+body.admin_page_yap-edit-group .form-table input[type="number"],
+body.admin_page_yap-edit-group .form-table textarea,
+body.admin_page_yap-edit-group .form-table select {
+    border: 2px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--yap-gray-50);
+}
+
+.yap-admin-page .form-table input[type="text"]:focus,
+.yap-admin-page .form-table input[type="number"]:focus,
+.yap-admin-page .form-table textarea:focus,
+.yap-admin-page .form-table select:focus,
+body.admin_page_yap-edit-group .form-table input:focus,
+body.admin_page_yap-edit-group .form-table textarea:focus,
+body.admin_page_yap-edit-group .form-table select:focus {
+    outline: none;
+    border-color: var(--yap-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.yap-admin-page .form-table .description,
+body.admin_page_yap-edit-group .form-table .description {
+    color: var(--yap-gray-600);
+    font-size: 13px;
+    margin-top: 8px;
+    display: block;
+}
+
+/* ============================================
+   Buttons - SCOPED
+   ============================================ */
+.yap-admin-page .button-primary,
+body.admin_page_yap-edit-group .button-primary {
+    background: var(--yap-primary) !important;
+    border-color: var(--yap-primary) !important;
+    color: white !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    border-radius: var(--yap-radius) !important;
+    box-shadow: var(--yap-shadow-sm) !important;
+    transition: all 0.2s ease !important;
+    text-shadow: none !important;
+}
+
+.yap-admin-page .button-primary:hover,
+.yap-admin-page .button-primary:focus,
+body.admin_page_yap-edit-group .button-primary:hover,
+body.admin_page_yap-edit-group .button-primary:focus {
+    background: var(--yap-primary-dark) !important;
+    border-color: var(--yap-primary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--yap-shadow) !important;
+}
+
+.yap-admin-page .button,
+body.admin_page_yap-edit-group .button {
+    border-radius: var(--yap-radius) !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    border: 2px solid var(--yap-gray-200) !important;
+}
+
+.yap-admin-page .button:hover,
+body.admin_page_yap-edit-group .button:hover {
+    border-color: var(--yap-gray-300) !important;
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   Nested Groups
+   ============================================ */
+.nested-group {
+    background: linear-gradient(to right, var(--yap-gray-50), white);
+    border-left: 4px solid var(--yap-primary);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: var(--yap-shadow-sm);
+    animation: slideIn 0.3s ease-out;
 }
 
 @keyframes slideIn {
@@ -52,133 +211,590 @@ body.admin_page_yap-edit-group .update-nag,
     }
 }
 
-/* Form improvements */
-.yap-custom-fields .form-table th {
-    width: 200px;
-    font-weight: 600;
-}
-
-.yap-custom-fields .regular-text {
-    width: 100%;
-    max-width: 400px;
-}
-
-/* Nested field indicators */
-.nested-group h2,
 .nested-group h3,
 .nested-group h4 {
+    color: var(--yap-gray-700);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
-/* Add field section */
-.nested-group .form-table {
-    margin: 0;
+.nested-group h3::before {
+    content: "📦";
 }
 
-.nested-group .button {
-    margin-top: 10px;
+.nested-group[data-depth="2"] {
+    border-left-color: var(--yap-primary-light);
+    margin-left: 20px;
 }
 
-/* Code display */
-.notice pre {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 13px;
-    line-height: 1.6;
-    border-radius: 3px;
-    margin: 10px 0;
+.nested-group[data-depth="3"] {
+    border-left-color: var(--yap-success);
+    margin-left: 40px;
 }
 
-.yap-code-box {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 30px;
-    clear: both;
+/* ============================================
+   Tables - SCOPED
+   ============================================ */
+.yap-admin-page .wp-list-table,
+body.admin_page_yap-edit-group .wp-list-table,
+body.admin_page_yap-groups .wp-list-table {
+    border: none !important;
+    border-radius: var(--yap-radius) !important;
+    overflow: hidden;
+    box-shadow: var(--yap-shadow-sm) !important;
 }
 
-/* Add field form in nested groups */
-.nested-add-field-form {
-    margin-top: 20px;
-    padding: 15px;
-    background: #fff;
-    border: 2px dashed #0073aa;
-    border-radius: 5px;
-    clear: both;
+.yap-admin-page .wp-list-table thead th,
+body.admin_page_yap-edit-group .wp-list-table thead th,
+body.admin_page_yap-groups .wp-list-table thead th {
+    background: var(--yap-gray-50) !important;
+    color: var(--yap-gray-700) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    padding: 16px !important;
+    border-bottom: 2px solid var(--yap-gray-200) !important;
 }
 
-.nested-add-field-form h4 {
-    margin-top: 0;
-    color: #0073aa;
+.yap-admin-page .wp-list-table tbody tr,
+body.admin_page_yap-edit-group .wp-list-table tbody tr,
+body.admin_page_yap-groups .wp-list-table tbody tr {
+    transition: all 0.2s ease;
 }
 
-/* Metabox styling */
+.yap-admin-page .wp-list-table tbody tr:hover,
+body.admin_page_yap-edit-group .wp-list-table tbody tr:hover,
+body.admin_page_yap-groups .wp-list-table tbody tr:hover {
+    background: var(--yap-gray-50) !important;
+}
+
+.yap-admin-page .wp-list-table td,
+body.admin_page_yap-edit-group .wp-list-table td,
+body.admin_page_yap-groups .wp-list-table td {
+    padding: 16px !important;
+    border-bottom: 1px solid var(--yap-gray-100) !important;
+}
+
+.yap-admin-page .wp-list-table input[type="text"],
+.yap-admin-page .wp-list-table select,
+body.admin_page_yap-edit-group .wp-list-table input[type="text"],
+body.admin_page_yap-edit-group .wp-list-table select {
+    width: 100% !important;
+    min-width: 120px;
+}
+
+/* ============================================
+   Image Fields
+   ============================================ */
+.yap-image-field-wrapper,
+.yap-image-field-wrapper-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.yap-upload-image-button,
+.yap-upload-image-button-edit,
+.yap-upload-image-button-nested {
+    background: white !important;
+    border: 2px dashed var(--yap-gray-300) !important;
+    color: var(--yap-gray-700) !important;
+    padding: 12px 20px !important;
+    border-radius: var(--yap-radius) !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yap-upload-image-button::before,
+.yap-upload-image-button-edit::before,
+.yap-upload-image-button-nested::before {
+    content: "📷";
+    font-size: 18px;
+}
+
+.yap-upload-image-button:hover,
+.yap-upload-image-button-edit:hover,
+.yap-upload-image-button-nested:hover {
+    border-color: var(--yap-primary) !important;
+    border-style: solid !important;
+    color: var(--yap-primary) !important;
+    background: var(--yap-gray-50) !important;
+}
+
+.yap-image-preview,
+.yap-image-preview-edit,
+.yap-image-preview-nested {
+    max-width: 200px;
+    border-radius: var(--yap-radius);
+    box-shadow: var(--yap-shadow);
+    border: 2px solid var(--yap-gray-100);
+    transition: all 0.2s ease;
+}
+
+.yap-image-preview:hover,
+.yap-image-preview-edit:hover,
+.yap-image-preview-nested:hover {
+    transform: scale(1.02);
+    box-shadow: var(--yap-shadow-lg);
+}
+
+.yap-remove-image-button,
+.yap-remove-image-button-edit,
+.yap-remove-image-button-nested {
+    background: var(--yap-danger) !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: var(--yap-radius) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+.yap-remove-image-button:hover,
+.yap-remove-image-button-edit:hover,
+.yap-remove-image-button-nested:hover {
+    background: #e53e3e !important;
+}
+
+/* ============================================
+   Metaboxes
+   ============================================ */
+.postbox {
+    border: none !important;
+    box-shadow: var(--yap-shadow) !important;
+    border-radius: var(--yap-radius-lg) !important;
+    margin-bottom: 20px !important;
+}
+
+.postbox .hndle {
+    background: linear-gradient(135deg, var(--yap-primary), var(--yap-primary-light)) !important;
+    color: white !important;
+    border: none !important;
+    padding: 16px 20px !important;
+    font-weight: 600 !important;
+    border-radius: var(--yap-radius-lg) var(--yap-radius-lg) 0 0 !important;
+}
+
+.postbox .inside {
+    padding: 20px !important;
+    background: white !important;
+}
+
 .yap-metabox-field {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .yap-metabox-field label {
     display: block;
     font-weight: 600;
-    margin-bottom: 5px;
+    color: var(--yap-gray-700);
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .yap-metabox-field input[type="text"],
 .yap-metabox-field textarea,
 .yap-metabox-field select {
     width: 100%;
+    border: 2px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 10px 14px;
+    background: var(--yap-gray-50);
+    transition: all 0.2s ease;
+}
+
+.yap-metabox-field input:focus,
+.yap-metabox-field textarea:focus,
+.yap-metabox-field select:focus {
+    outline: none;
+    border-color: var(--yap-primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .yap-metabox-field textarea {
-    min-height: 100px;
+    min-height: 120px;
+    resize: vertical;
 }
 
-/* Depth indicators */
-.nested-group[data-depth="1"] {
-    border-left-color: #0073aa;
+/* ============================================
+   Add Field Forms
+   ============================================ */
+.nested-add-field-form {
+    background: white;
+    border: 2px dashed var(--yap-gray-300);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    margin-top: 20px;
+    transition: all 0.2s ease;
 }
 
-.nested-group[data-depth="2"] {
-    border-left-color: #00a0d2;
+.nested-add-field-form:hover {
+    border-color: var(--yap-primary);
+    border-style: solid;
+    background: var(--yap-gray-50);
 }
 
-.nested-group[data-depth="3"] {
-    border-left-color: #46b450;
-}
-
-/* Table improvements */
-.yap-custom-fields table th,
-.yap-custom-fields table td {
-    padding: 10px;
-}
-
-.yap-custom-fields table input[type="text"] {
-    width: 100%;
-}
-
-/* Button improvements */
-.add-nested-field .dashicons {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-}
-
-.yap-upload-button {
-    margin-top: 5px;
-}
-
-.yap-image-preview {
-    margin-top: 10px;
-    max-width: 150px;
-    display: block;
-}
-
-.yap-image-field-wrapper {
+.nested-add-field-form h4 {
+    color: var(--yap-primary);
+    font-weight: 600;
+    margin: 0 0 16px 0;
     display: flex;
-    gap: 10px;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
 
-.yap-image-field-wrapper input {
-    flex: 1;
+.nested-add-field-form h4::before {
+    content: "➕";
+}
+
+/* ============================================
+   Notices & Messages - SCOPED
+   ============================================ */
+.yap-admin-page .notice,
+body.admin_page_yap-edit-group .notice,
+body.admin_page_yap-groups .notice {
+    border-left-width: 4px !important;
+    border-radius: var(--yap-radius) !important;
+    padding: 16px 20px !important;
+    box-shadow: var(--yap-shadow-sm) !important;
+}
+
+.yap-admin-page .notice.notice-success,
+body.admin_page_yap-edit-group .notice.notice-success {
+    border-left-color: var(--yap-success) !important;
+    background: #f0fff4 !important;
+}
+
+.yap-admin-page .notice.notice-error,
+body.admin_page_yap-edit-group .notice.notice-error {
+    border-left-color: var(--yap-danger) !important;
+    background: #fff5f5 !important;
+}
+
+.yap-admin-page .notice.notice-info,
+body.admin_page_yap-edit-group .notice.notice-info {
+    border-left-color: var(--yap-primary) !important;
+    background: #f0f4ff !important;
+}
+
+/* ============================================
+   Links & Actions - SCOPED
+   ============================================ */
+.yap-admin-page a.delete-field,
+body.admin_page_yap-edit-group a.delete-field {
+    color: var(--yap-danger) !important;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.yap-admin-page a.delete-field:hover,
+body.admin_page_yap-edit-group a.delete-field:hover {
+    color: #e53e3e !important;
+    text-decoration: underline;
+}
+
+/* ============================================
+   Layout Grid (Sidebar + Main)
+   ============================================ */
+.yap-layout-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.yap-sidebar {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+}
+
+.yap-sidebar-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.yap-main-content {
+    min-width: 0;
+}
+
+/* ============================================
+   Create Form
+   ============================================ */
+.yap-create-form .yap-form-group {
+    margin-bottom: 20px;
+}
+
+.yap-create-form label {
+    display: block;
+    font-weight: 600;
+    color: var(--yap-gray-700);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.yap-create-form input[type="text"],
+.yap-create-form select {
+    width: 100%;
+    border: 2px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 10px 14px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.yap-create-form input:focus,
+.yap-create-form select:focus {
+    outline: none;
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.yap-help-text {
+    display: block;
+    font-size: 12px;
+    color: var(--yap-gray-600);
+    margin-top: 6px;
+}
+
+.yap-submit-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px !important;
+}
+
+.yap-refresh-btn {
+    font-size: 13px !important;
+    padding: 6px 16px !important;
+}
+
+/* ============================================
+   Toast Notifications
+   ============================================ */
+#yap-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.yap-toast {
+    min-width: 320px;
+    max-width: 450px;
+    padding: 16px 20px;
+    background: white;
+    border-radius: var(--yap-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.yap-toast-show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.yap-toast-success {
+    border-left-color: var(--yap-success);
+    background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+    color: #22543d;
+}
+
+.yap-toast-error {
+    border-left-color: var(--yap-danger);
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    color: #742a2a;
+}
+
+.yap-toast-info {
+    border-left-color: var(--yap-primary);
+    background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+    color: #2d3748;
+}
+
+/* ============================================
+   Toggle Switch
+   ============================================ */
+.yap-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.yap-toggle-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--yap-gray-300);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    background: white;
+    flex-shrink: 0;
+}
+
+.yap-toggle-checkbox:hover {
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.yap-toggle-checkbox:checked {
+    background: var(--yap-primary);
+    border-color: var(--yap-primary);
+}
+
+.yap-toggle-checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.yap-toggle-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--yap-gray-700);
+}
+
+/* ============================================
+   Nested Groups Badge
+   ============================================ */
+.yap-nested-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, var(--yap-primary-light), var(--yap-primary));
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.yap-nested-group-row {
+    background: linear-gradient(to right, #f8f9fa 0%, #ffffff 100%);
+}
+
+.yap-child-group-row {
+    background: linear-gradient(to right, #f0f4ff 0%, #fafbff 100%) !important;
+    border-left: 3px solid var(--yap-primary-light) !important;
+}
+
+.yap-child-group-row td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+.yap-child-group-row:hover {
+    background: linear-gradient(to right, #e8eeff 0%, #f5f7ff 100%) !important;
+}
+
+.yap-groups-info {
+    padding: 12px 16px;
+    background: var(--yap-gray-50);
+    border-radius: var(--yap-radius);
+    border-left: 3px solid var(--yap-primary);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes yapFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.yap-group-row {
+    animation: yapFadeIn 0.3s ease-out;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1200px) {
+    .yap-layout-grid {
+        grid-template-columns: 320px 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 960px) {
+    .yap-layout-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .yap-sidebar {
+        position: static;
+    }
+    
+    #yap-toast-container {
+        left: 24px;
+        right: 24px;
+    }
+    
+    .yap-toast {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 782px) {
+    .form-table th {
+        width: 100%;
+        display: block;
+    }
+    
+    .form-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .nested-group[data-depth="2"],
+    .nested-group[data-depth="3"] {
+        margin-left: 0;
+    }
+    
+    #yap-toast-container {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+    }
 }

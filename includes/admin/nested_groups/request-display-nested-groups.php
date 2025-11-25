@@ -77,19 +77,19 @@ function yap_display_nested_group($nested_table_name, $parent_field_id, $depth =
                                 <a href="<?php echo admin_url('admin.php?page=yap-edit-group&table=' . urlencode($nested_table_name) . '&delete_field=' . $field->id); ?>" onclick="return confirm('Czy na pewno chcesz usunąć to pole?');">Usuń</a>
                             </td>
                         </tr>
-
                         <?php 
                         // Sprawdzamy czy są zagnieżdżone grupy
                         if ($field->field_type === 'nested_group' && !empty($field->nested_field_ids)) {
                             $nested_field_ids = json_decode($field->nested_field_ids, true);
                             if (is_array($nested_field_ids)) {
                                 foreach ($nested_field_ids as $nested_sub_table) {
+                                    echo '<tr><td colspan="6">';
                                     yap_display_nested_group($nested_sub_table, $field->id, $depth + 1);
+                                    echo '</td></tr>';
                                 }
                             }
                         }
                         ?>
-
                     <?php endforeach; ?>
                 </tbody>
             </table>
