@@ -402,7 +402,16 @@ body.admin_page_yap-edit-group .wp-list-table select {
 
 .yap-metabox-field input[type="text"],
 .yap-metabox-field textarea,
-.yap-metabox-field select {
+.yap-metabox-field select,
+.yap-metabox-field input[type="email"],
+.yap-metabox-field input[type="url"],
+.yap-metabox-field input[type="tel"],
+.yap-metabox-field input[type="number"],
+.yap-metabox-field input[type="date"],
+.yap-metabox-field input[type="time"],
+.yap-metabox-field input[type="datetime-local"],
+.yap-metabox-field input[type="color"],
+.yap-metabox-field input[type="password"] {
     width: 100%;
     border: 2px solid var(--yap-gray-200);
     border-radius: var(--yap-radius);
@@ -423,6 +432,319 @@ body.admin_page_yap-edit-group .wp-list-table select {
 .yap-metabox-field textarea {
     min-height: 120px;
     resize: vertical;
+}
+
+/* Group Field Styling */
+.yap-group-container {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(102, 126, 234, 0.02));
+    border: 2px solid #e0e7ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.yap-group-container .yap-group-field {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.yap-group-container .yap-group-field:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.yap-group-field label {
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.yap-group-empty,
+.yap-repeater-empty {
+    padding: 15px;
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.yap-group-empty p,
+.yap-repeater-empty p {
+    margin: 0;
+}
+
+.yap-group-empty p:first-child,
+.yap-repeater-empty p:first-child {
+    margin: 0;
+    font-weight: 600;
+}
+
+.yap-group-empty p:last-child,
+.yap-repeater-empty p:last-child {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #856404;
+}
+
+/* Repeater Styling */
+.yap-repeater-container {
+    border: 2px solid #e0e7ff;
+    border-radius: 8px;
+    padding: 15px;
+    background: #fafbfd;
+}
+
+.yap-repeater-info {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: #f0f6fc;
+    border-left: 3px solid #72aee6;
+    font-size: 12px;
+    color: #1e293b;
+    border-radius: 4px;
+}
+
+.yap-repeater-info code {
+    background: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+.yap-repeater-rows {
+    margin-bottom: 12px;
+}
+
+.yap-repeater-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.yap-repeater-row-handle {
+    flex-shrink: 0;
+    cursor: grab;
+    padding: 4px;
+    color: #999;
+    user-select: none;
+}
+
+.yap-repeater-row-handle:active {
+    cursor: grabbing;
+}
+
+.yap-repeater-row-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.yap-repeater-field {
+    margin-bottom: 0;
+}
+
+.yap-repeater-field label {
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.yap-repeater-field .widefat {
+    font-size: 13px;
+    padding: 8px 10px;
+}
+
+.yap-remove-repeater-row {
+    flex-shrink: 0;
+    align-self: center;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.yap-remove-repeater-row:hover {
+    background: #c82333;
+}
+
+.yap-repeater-actions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.yap-add-repeater-row {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.yap-add-repeater-row:hover {
+    background: #218838;
+}
+
+/* File Field */
+.yap-file-field-wrapper {
+    border: 2px dashed #72aee6;
+    border-radius: 6px;
+    padding: 12px;
+    text-align: center;
+}
+
+.yap-file-field-wrapper .button {
+    margin-top: 8px;
+}
+
+.yap-file-preview {
+    margin-top: 10px;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.yap-file-preview a {
+    text-decoration: none;
+    color: #0073aa;
+}
+
+.yap-file-preview a:hover {
+    text-decoration: underline;
+}
+
+/* Image Field */
+.yap-image-field-wrapper {
+    padding: 10px;
+    background: white;
+}
+
+.yap-image-field-wrapper .button {
+    margin-right: 10px;
+}
+
+.yap-image-preview {
+    margin-top: 10px;
+    max-width: 150px;
+    border-radius: 4px;
+    display: block;
+}
+
+.yap-image-field-wrapper .yap-remove-image-button {
+    margin-top: 8px;
+}
+
+/* Gallery Field */
+.yap-gallery-field-wrapper {
+    padding: 10px;
+    background: white;
+}
+
+.yap-gallery-preview {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.yap-gallery-item {
+    position: relative;
+    width: fit-content;
+}
+
+.yap-gallery-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.yap-remove-gallery-item {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.yap-remove-gallery-item:hover {
+    background: rgba(220, 53, 69, 1);
+}
+
+/* Group Info */
+.yap-group-info {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: #f0f6fc;
+    border-left: 3px solid #72aee6;
+    font-size: 12px;
+    color: #1e293b;
+    border-radius: 4px;
+}
+
+.yap-group-info code {
+    background: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+/* WYSIWYG Editor in Metabox */
+.yap-metabox-field .wp-editor-wrap {
+    margin-top: 8px;
+}
+
+.yap-metabox-field .wp-editor-container iframe {
+    min-height: 200px !important;
+}
+
+/* Color Input */
+.yap-metabox-field input[type="color"] {
+    height: 44px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+/* Radio and Checkbox Groups */
+.yap-radio-group label,
+.yap-metabox-field label[type="checkbox"] {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.yap-radio-group input[type="radio"],
+.yap-radio-group input[type="checkbox"],
+.yap-metabox-field input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto;
+    margin-top: 0;
 }
 
 /* ============================================
@@ -798,3 +1120,1541 @@ body.admin_page_yap-edit-group a.delete-field:hover {
         right: 16px;
     }
 }
+
+/* ============================================
+   REPEATER FIELD STYLES
+   ============================================ */
+.yap-repeater-field {
+    background: #fff;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.yap-repeater-rows {
+    margin-bottom: 15px;
+}
+
+.yap-repeater-row {
+    background: var(--yap-gray-50);
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.yap-repeater-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--yap-gray-200);
+}
+
+.yap-repeater-sort-handle {
+    cursor: move;
+    padding: 5px 10px;
+    color: var(--yap-gray-600);
+}
+
+.yap-repeater-sort-handle:hover {
+    color: var(--yap-primary);
+}
+
+.yap-repeater-row-number {
+    font-weight: 600;
+    color: var(--yap-gray-700);
+}
+
+.yap-repeater-remove-row {
+    background: var(--yap-danger);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.yap-repeater-remove-row:hover {
+    background: #e53e3e;
+}
+
+.yap-repeater-remove-row.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.yap-repeater-add-row {
+    background: var(--yap-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--yap-radius);
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yap-repeater-add-row:hover {
+    background: var(--yap-primary-dark);
+}
+
+.yap-repeater-add-row.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.yap-repeater-add-row::before {
+    content: "➕";
+}
+
+.yap-repeater-row-template {
+    display: none;
+}
+
+/* ============================================
+   FLEXIBLE CONTENT STYLES
+   ============================================ */
+.yap-flexible-field {
+    background: #fff;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.yap-flexible-layouts {
+    margin-bottom: 15px;
+}
+
+.yap-flexible-layout {
+    background: white;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.yap-flexible-layout-header {
+    background: var(--yap-gray-50);
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--yap-gray-200);
+}
+
+.yap-flexible-layout-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--yap-gray-700);
+}
+
+.yap-flexible-layout-handle {
+    cursor: move;
+    color: var(--yap-gray-600);
+}
+
+.yap-flexible-layout-handle:hover {
+    color: var(--yap-primary);
+}
+
+.yap-flexible-layout-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.yap-flexible-layout-toggle {
+    background: none;
+    border: none;
+    color: var(--yap-gray-600);
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.yap-flexible-layout-toggle:hover {
+    color: var(--yap-primary);
+}
+
+.yap-flexible-layout-toggle::after {
+    content: "▼";
+    margin-left: 5px;
+}
+
+.yap-flexible-layout-toggle.collapsed::after {
+    content: "▶";
+}
+
+.yap-flexible-remove-layout {
+    background: var(--yap-danger);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.yap-flexible-remove-layout:hover {
+    background: #e53e3e;
+}
+
+.yap-flexible-layout-content {
+    padding: 15px;
+}
+
+.yap-flexible-add-layout-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.yap-flexible-add-layout {
+    background: var(--yap-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--yap-radius);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.yap-flexible-add-layout:hover {
+    background: var(--yap-primary-dark);
+}
+
+.yap-flexible-layout-template {
+    display: none;
+}
+
+.yap-flexible-layout-type-badge {
+    background: var(--yap-primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   VALIDATION STYLES
+   ============================================ */
+.field-wrapper {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.yap-validation-error {
+    display: block;
+    color: var(--yap-danger);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+input.error,
+textarea.error,
+select.error {
+    border-color: var(--yap-danger) !important;
+    background-color: #fff5f5 !important;
+}
+
+input.error:focus,
+textarea.error:focus,
+select.error:focus {
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+}
+
+.yap-field-required::after {
+    content: "*";
+    color: var(--yap-danger);
+    margin-left: 4px;
+}
+
+/* ============================================
+   CONDITIONAL LOGIC STYLES
+   ============================================ */
+[data-conditional-logic] {
+    transition: opacity 0.2s, height 0.2s;
+}
+
+[data-conditional-logic].hidden {
+    display: none;
+}
+
+/* ============================================
+   FIELD OPTIONS PANEL
+   ============================================ */
+.yap-field-options-panel {
+    background: var(--yap-gray-50);
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.yap-field-options-panel h4 {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--yap-gray-700);
+}
+
+.yap-option-group {
+    margin-bottom: 15px;
+}
+
+.yap-option-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.yap-option-group input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.yap-conditional-rules {
+    background: white;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 10px;
+}
+
+.yap-conditional-rule {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.yap-conditional-rule select,
+.yap-conditional-rule input {
+    flex: 1;
+}
+
+.yap-remove-rule {
+    background: var(--yap-danger);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.yap-add-rule {
+    background: var(--yap-primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--yap-radius);
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* ============================================
+   REPEATER FIELD STYLES
+   ============================================ */
+
+.yap-repeater-container {
+    border: 2px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    box-shadow: var(--yap-shadow-sm);
+}
+
+.yap-repeater-info {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: #f0f6fc;
+    border-left: 4px solid #72aee6;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.yap-repeater-info code {
+    background: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #d63384;
+}
+
+.yap-repeater-rows {
+    margin-bottom: 15px;
+}
+
+.yap-repeater-row {
+    background: #ffffff;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 15px 50px 15px 40px;
+    margin-bottom: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: var(--yap-shadow-sm);
+    display: block;
+}
+
+.yap-repeater-row:hover {
+    box-shadow: var(--yap-shadow);
+    border-color: var(--yap-primary-light);
+}
+
+.yap-repeater-row-handle {
+    position: absolute;
+    left: 8px;
+    top: 15px;
+    cursor: move;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+    padding: 5px;
+    color: var(--yap-gray-600);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yap-repeater-row:hover .yap-repeater-row-handle {
+    opacity: 1;
+}
+
+.yap-repeater-row-handle .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.yap-repeater-row-content {
+    display: block;
+}
+
+.yap-remove-repeater-row {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--yap-danger);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 1;
+}
+
+.yap-repeater-row:hover .yap-remove-repeater-row {
+    opacity: 1;
+}
+
+.yap-remove-repeater-row:hover {
+    background: #c53030;
+}
+
+.yap-remove-repeater-row .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: white;
+}
+
+.yap-add-repeater-row {
+    background: var(--yap-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--yap-radius);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yap-add-repeater-row:hover {
+    background: var(--yap-primary-dark);
+}
+
+.yap-add-repeater-row::before {
+    content: "+";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Sortable placeholder */
+.yap-repeater-row-placeholder {
+    background: var(--yap-gray-100);
+    border: 2px dashed var(--yap-gray-300);
+    border-radius: var(--yap-radius);
+    height: 60px;
+    margin-bottom: 10px;
+    opacity: 0.6;
+}
+
+/* Fields inside repeater rows */
+.yap-repeater-row .yap-field-group,
+.yap-repeater-row .yap-repeater-field {
+    margin-bottom: 12px;
+}
+
+.yap-repeater-row .yap-field-group:last-child,
+.yap-repeater-row .yap-repeater-field:last-child {
+    margin-bottom: 0;
+}
+
+.yap-repeater-row label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: var(--yap-gray-700);
+}
+
+.yap-repeater-row input[type="text"],
+.yap-repeater-row input[type="number"],
+.yap-repeater-row input[type="email"],
+.yap-repeater-row input[type="url"],
+.yap-repeater-row textarea,
+.yap-repeater-row select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--yap-gray-300);
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.yap-repeater-row input:focus,
+.yap-repeater-row textarea:focus,
+.yap-repeater-row select:focus {
+    outline: none;
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Group field styles */
+.yap-group-container {
+    background: var(--yap-gray-50);
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.yap-group-container .yap-field-group {
+    margin-bottom: 12px;
+}
+
+.yap-group-container .yap-field-group:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   FIELD TOOLTIPS & USAGE INFO - CLICKABLE
+   ============================================ */
+
+.yap-field-tooltip {
+    transition: opacity 0.2s;
+    opacity: 0.7;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+}
+
+.yap-field-tooltip:hover {
+    opacity: 1;
+}
+
+.yap-field-tooltip:hover .dashicons {
+    color: var(--yap-primary) !important;
+}
+
+/* Remove transform on hover/active to prevent position jumping */
+
+/* Custom tooltip using data-tooltip */
+.yap-field-tooltip[data-tooltip] {
+    position: relative;
+}
+
+/* Tooltip bubble - shown on click via .active class */
+.yap-field-tooltip[data-tooltip]::before {
+    content: attr(data-tooltip);
+    position: fixed;
+    top: var(--tooltip-top, -9999px);
+    left: var(--tooltip-left, -9999px);
+    background: #1e293b;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    white-space: normal;
+    max-width: min(320px, calc(100vw - 40px));
+    word-wrap: break-word;
+    z-index: 10000;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    line-height: 1.4;
+}
+
+/* Tooltip arrow */
+.yap-field-tooltip[data-tooltip]::after {
+    content: '';
+    position: fixed;
+    top: var(--arrow-top, -9999px);
+    left: var(--arrow-left, -9999px);
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+/* Arrow pointing up (tooltip below icon) */
+.yap-field-tooltip[data-tooltip][data-position="below"]::after {
+    border-bottom-color: #1e293b;
+}
+
+/* Arrow pointing down (tooltip above icon) */
+.yap-field-tooltip[data-tooltip][data-position="above"]::after {
+    border-top-color: #1e293b;
+    border-bottom-color: transparent;
+}
+
+/* Active state - shown on click */
+.yap-field-tooltip[data-tooltip].yap-tooltip-active::before,
+.yap-field-tooltip[data-tooltip].yap-tooltip-active::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Visual feedback when active */
+.yap-field-tooltip.yap-tooltip-active .dashicons {
+    color: var(--yap-primary) !important;
+}
+
+/* ============================================
+   SUB-FIELDS STYLES (Group/Repeater nested fields)
+   ============================================ */
+
+/* Container dla sub-fields (grupy, repeatery) */
+.yap-field-sub-fields-container {
+    margin-top: 15px;
+    border-top: 2px solid var(--yap-gray-200);
+    padding-top: 15px;
+}
+
+/* Header wyświetlający liczbę zagnieżdżonych pól */
+.yap-sub-fields-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--yap-gray-700);
+    font-weight: 500;
+}
+
+.yap-sub-fields-header .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--yap-primary);
+}
+
+.yap-sub-fields-count {
+    color: var(--yap-primary);
+    font-weight: 600;
+}
+
+/* Drop zone dla sub-fields (przyjmuje drag&drop) */
+.yap-sub-fields-drop-zone {
+    background: var(--yap-gray-50);
+    border: 2px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 12px;
+    min-height: 50px;
+    transition: all 0.2s ease;
+}
+
+.yap-sub-fields-drop-zone.dragover {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Pojedyncze sub-field item */
+.yap-sub-field-item {
+    background: white;
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+}
+
+.yap-sub-field-item:hover {
+    border-color: var(--yap-primary);
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Main row - informacje o polu */
+.yap-sub-field-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: move;
+    user-select: none;
+}
+
+/* Toggle button dla nested containers */
+.yap-sub-field-toggle {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    color: var(--yap-primary);
+    font-size: 16px;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.yap-sub-field-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Icon dla pola */
+.yap-sub-field-icon {
+    font-size: 16px;
+    min-width: 20px;
+    flex-shrink: 0;
+}
+
+/* Label pola */
+.yap-sub-field-label {
+    font-weight: 500;
+    color: var(--yap-gray-900);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+}
+
+/* Type badge */
+.yap-sub-field-type {
+    font-size: 11px;
+    color: var(--yap-gray-600);
+    background: var(--yap-gray-100);
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Count dla nested fields */
+.yap-sub-field-count {
+    font-size: 11px;
+    color: var(--yap-primary);
+    font-weight: 600;
+    margin-left: 4px;
+    flex-shrink: 0;
+}
+
+/* Action buttons */
+.yap-sub-field-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.yap-sub-field-edit,
+.yap-sub-field-remove {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--yap-gray-600);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.yap-sub-field-edit:hover {
+    color: var(--yap-primary);
+    background: var(--yap-gray-100);
+}
+
+.yap-sub-field-remove:hover {
+    color: var(--yap-danger);
+    background: var(--yap-gray-100);
+}
+
+.yap-sub-field-edit .dashicons,
+.yap-sub-field-remove .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Nested drop zone (dla zagnieżdżonych kontenerów) */
+.yap-nested-drop-zone {
+    margin-top: 12px;
+    padding-left: 20px;
+    border-left: 3px solid var(--yap-primary);
+    display: block;
+}
+
+/* Sub-field placeholder (drag tu aby dodać pole) */
+.yap-sub-field-placeholder {
+    background: var(--yap-gray-50);
+    border: 2px dashed var(--yap-gray-300);
+    border-radius: var(--yap-radius);
+    padding: 20px;
+    text-align: center;
+    color: var(--yap-gray-600);
+    cursor: default;
+    transition: all 0.2s ease;
+}
+
+.yap-sub-field-placeholder .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: var(--yap-gray-400);
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.yap-sub-field-placeholder p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--yap-gray-500);
+}
+
+.yap-sub-fields-drop-zone.dragover .yap-sub-field-placeholder {
+    background: rgba(102, 126, 234, 0.05);
+    border-color: var(--yap-primary);
+    color: var(--yap-primary);
+}
+
+/* Container field item (group/repeater na main canvas) */
+.yap-field-container {
+    border: 2px solid var(--yap-primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.02) 0%, rgba(118, 75, 162, 0.02) 100%);
+}
+
+.yap-field-container .yap-field-item-header {
+    background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+}
+
+/* Nested level styling */
+.yap-nested-level-2 {
+    background: #f9fafb;
+    border-left: 4px solid #667eea;
+    padding-left: 12px;
+}
+
+.yap-nested-placeholder {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* ============================================
+   RESPONSIVE DESIGN (Mobile, Tablet)
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Repeater Row Responsive */
+    .yap-repeater-row {
+        flex-direction: column;
+    }
+
+    .yap-repeater-row-content {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .yap-repeater-row-handle {
+        order: -1;
+    }
+
+    .yap-remove-repeater-row {
+        width: 100%;
+        align-self: auto;
+    }
+
+    /* Group Container Responsive */
+    .yap-group-container {
+        padding: 12px;
+    }
+
+    .yap-group-fields {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Gallery Grid Responsive */
+    .yap-gallery-preview {
+        gap: 8px;
+    }
+
+    .yap-gallery-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* File Field Responsive */
+    .yap-file-field-wrapper {
+        padding: 10px;
+    }
+
+    .yap-file-preview {
+        font-size: 11px;
+    }
+
+    /* Metabox Fields */
+    .yap-metabox-field {
+        margin-bottom: 15px;
+    }
+
+    .yap-metabox-field input[type="text"],
+    .yap-metabox-field textarea,
+    .yap-metabox-field select,
+    .yap-metabox-field input[type="email"],
+    .yap-metabox-field input[type="url"],
+    .yap-metabox-field input[type="tel"],
+    .yap-metabox-field input[type="number"],
+    .yap-metabox-field input[type="date"],
+    .yap-metabox-field input[type="time"],
+    .yap-metabox-field input[type="datetime-local"],
+    .yap-metabox-field input[type="color"],
+    .yap-metabox-field input[type="password"] {
+        font-size: 16px; /* Prevent zoom on focus */
+    }
+
+    /* WP Editor */
+    .yap-metabox-field .wp-editor-wrap {
+        margin-top: 6px;
+    }
+
+    .yap-metabox-field .wp-editor-container iframe {
+        min-height: 150px !important;
+    }
+
+    /* Info Box */
+    .yap-group-info,
+    .yap-repeater-info {
+        font-size: 11px;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+    }
+
+    .yap-group-info code,
+    .yap-repeater-info code {
+        font-size: 10px;
+        display: block;
+        margin-top: 4px;
+        padding: 4px 6px;
+    }
+
+    /* Image Preview */
+    .yap-image-preview {
+        max-width: 120px;
+    }
+
+    /* Radio/Checkbox */
+    .yap-radio-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+}
+
+/* ============================================
+   Color Picker - shadcn/ui Style
+   ============================================ */
+input[type="color"],
+.yap-metabox-field input[type="color"] {
+    display: inline-block !important;
+    width: 48px !important;
+    height: 40px !important;
+    padding: 2px !important;
+    border: 2px solid var(--yap-gray-200) !important;
+    border-radius: var(--yap-radius) !important;
+    cursor: pointer;
+    background-color: transparent !important;
+    transition: all 0.2s ease !important;
+}
+
+input[type="color"]:hover,
+.yap-metabox-field input[type="color"]:hover {
+    border-color: var(--yap-gray-300) !important;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1) !important;
+}
+
+input[type="color"]:focus,
+.yap-metabox-field input[type="color"]:focus {
+    outline: none !important;
+    border-color: var(--yap-primary) !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Color Picker Wrapper - for better UX */
+.yap-color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.yap-color-picker-wrapper label {
+    margin-bottom: 0 !important;
+    font-weight: 500;
+    color: var(--yap-gray-700);
+}
+
+.yap-color-picker-wrapper input[type="color"] {
+    flex-shrink: 0;
+}
+
+.yap-color-preview {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 40px;
+    border-radius: var(--yap-radius);
+    border: 2px solid var(--yap-gray-200);
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.yap-color-preview.has-color {
+    border-color: var(--yap-gray-300);
+}
+
+/* Color value display */
+.yap-color-value {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 12px;
+    color: var(--yap-gray-600);
+    padding: 4px 8px;
+    background: var(--yap-gray-50);
+    border-radius: 4px;
+    border: 1px solid var(--yap-gray-200);
+    min-width: 70px;
+    text-align: center;
+}
+
+/* Color picker in group/repeater fields */
+.yap-group-field input[type="color"],
+.yap-repeater-field input[type="color"] {
+    width: 44px !important;
+    height: 36px !important;
+    padding: 2px !important;
+}
+
+@media (max-width: 480px) {
+    /* Extra small devices */
+    .yap-repeater-row {
+        padding: 8px;
+    }
+
+    .yap-repeater-field label {
+        font-size: 11px;
+    }
+
+    .yap-repeater-field .widefat {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    .yap-group-container {
+        padding: 10px;
+    }
+
+    .yap-group-field label {
+        font-size: 12px;
+    }
+
+    .yap-metabox-field label {
+        font-size: 12px;
+    }
+
+    .yap-gallery-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .yap-image-preview {
+        max-width: 100px;
+    }
+
+    .yap-remove-repeater-row,
+    .yap-add-repeater-row {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    /* Buttons */
+    .button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    /* Remove inline styles that are too wide */
+    .yap-file-preview a {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .yap-file-preview .button {
+        display: block;
+        width: 100%;
+        margin: 4px 0 0 0;
+    }
+}
+
+/* ============================================
+   Custom Templates System
+   ============================================ */
+
+/* Custom template field items in selector */
+.yap-custom-template {
+    cursor: grab;
+    transition: all 0.2s ease;
+    border-radius: var(--yap-radius);
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #667eea15 0%, #667eea08 100%);
+    border: 2px solid var(--yap-gray-200);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.yap-custom-template:hover {
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.yap-custom-template:active {
+    cursor: grabbing;
+}
+
+.yap-custom-template.dragging {
+    opacity: 0.7;
+    border-color: var(--yap-primary);
+}
+
+.yap-custom-template .yap-field-type-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.yap-custom-template .yap-field-type-label {
+    font-weight: 600;
+    color: var(--yap-gray-900);
+    flex: 1;
+}
+
+.yap-custom-template .yap-field-type-type {
+    font-size: 12px;
+    color: var(--yap-gray-600);
+}
+
+/* Custom template modal */
+.yap-custom-template-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yap-custom-template-modal .yap-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: -1;
+}
+
+.yap-custom-template-modal .yap-modal-content {
+    background: white;
+    border-radius: var(--yap-radius-lg);
+    box-shadow: var(--yap-shadow-lg);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+    z-index: 1;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.yap-custom-template-modal .yap-modal-header {
+    padding: 24px;
+    border-bottom: 2px solid var(--yap-gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.yap-custom-template-modal .yap-modal-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--yap-gray-900);
+}
+
+.yap-custom-template-modal .yap-modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--yap-gray-600);
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--yap-radius);
+    transition: all 0.2s ease;
+}
+
+.yap-custom-template-modal .yap-modal-close:hover {
+    background: var(--yap-gray-100);
+    color: var(--yap-gray-900);
+}
+
+.yap-custom-template-modal .yap-modal-body {
+    padding: 24px;
+}
+
+.yap-custom-template-modal .yap-form-group {
+    margin-bottom: 24px;
+}
+
+.yap-custom-template-modal .yap-form-group:last-child {
+    margin-bottom: 0;
+}
+
+.yap-custom-template-modal label {
+    display: block;
+    font-weight: 600;
+    color: var(--yap-gray-900);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.yap-custom-template-modal .required {
+    color: var(--yap-danger);
+}
+
+.yap-custom-template-modal .yap-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--yap-gray-300);
+    border-radius: var(--yap-radius);
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    transition: all 0.2s ease;
+    background: white;
+    color: var(--yap-gray-900);
+}
+
+.yap-custom-template-modal .yap-input:focus {
+    outline: none;
+    border-color: var(--yap-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.yap-custom-template-modal small {
+    display: block;
+    margin-top: 6px;
+    color: var(--yap-gray-600);
+    font-size: 13px;
+}
+
+.yap-template-fields-list {
+    background: var(--yap-gray-50);
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    padding: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.yap-template-field-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border-radius: var(--yap-radius);
+    background: white;
+    border: 1px solid var(--yap-gray-200);
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.yap-template-field-item:last-child {
+    margin-bottom: 0;
+}
+
+.yap-template-field-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.yap-template-field-label {
+    font-weight: 500;
+    color: var(--yap-gray-900);
+    flex: 1;
+}
+
+.yap-template-field-type {
+    color: var(--yap-gray-600);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.yap-template-fields-empty {
+    text-align: center;
+    color: var(--yap-gray-600);
+    padding: 24px;
+    margin: 0;
+    font-style: italic;
+}
+
+.yap-custom-template-modal .yap-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--yap-gray-200);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.yap-settings-footer-spacer {
+    flex: 1;
+}
+
+.yap-custom-template-modal .button {
+    margin: 0;
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: var(--yap-radius);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.yap-custom-template-modal .button-secondary {
+    background: var(--yap-gray-100);
+    color: var(--yap-gray-900);
+    border-color: var(--yap-gray-300);
+}
+
+.yap-custom-template-modal .button-secondary:hover {
+    background: var(--yap-gray-200);
+    border-color: var(--yap-gray-400);
+}
+
+.yap-custom-template-modal .button-primary {
+    background: var(--yap-primary);
+    color: white;
+    border-color: var(--yap-primary-dark);
+}
+
+.yap-custom-template-modal .button-primary:hover {
+    background: var(--yap-primary-dark);
+    border-color: var(--yap-primary-dark);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* "Create Template" button in field settings modal */
+.yap-create-template {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #5568d3 100%) !important;
+    color: white !important;
+    border: none !important;
+    font-weight: 600;
+}
+
+.yap-create-template:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #4a5ab8 100%) !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+.yap-create-template .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Custom category in field selector */
+.yap-field-category:has(.yap-field-type-list[data-category="custom"]) {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid var(--yap-gray-200);
+}
+
+.yap-field-category:has(.yap-field-type-list[data-category="custom"]) h4 {
+    color: var(--yap-primary);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Drag over state for custom templates */
+#yap-drop-zone.drag-over {
+    background: linear-gradient(135deg, var(--yap-gray-50) 0%, #667eea15 100%);
+    border-color: var(--yap-primary);
+    box-shadow: inset 0 0 0 2px var(--yap-primary);
+}
+
+/* Icon Picker Styles */
+.yap-form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.yap-form-row-2col {
+    grid-template-columns: 1fr 1fr;
+}
+
+.yap-form-row .yap-form-group {
+    flex: 1;
+}
+
+.yap-icon-picker-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.yap-icon-input {
+    flex: 1 !important;
+    text-align: center;
+    font-size: 18px !important;
+    font-weight: 600;
+    padding: 12px 14px !important;
+}
+
+.yap-icon-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--yap-gray-100);
+    border: 2px solid var(--yap-gray-300);
+    border-radius: var(--yap-radius);
+    font-size: 28px;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.yap-icon-input:focus + .yap-icon-preview {
+    border-color: var(--yap-primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.yap-icon-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 8px;
+    padding: 12px;
+    background: var(--yap-gray-50);
+    border: 1px solid var(--yap-gray-200);
+    border-radius: var(--yap-radius);
+    margin-bottom: 16px;
+}
+
+.yap-icon-picker-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--yap-gray-300);
+    background: white;
+    border-radius: var(--yap-radius);
+    cursor: pointer;
+    font-size: 24px;
+    transition: all 0.2s ease;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.yap-icon-picker-btn:hover {
+    border-color: var(--yap-primary);
+    background: var(--yap-gray-50);
+    transform: scale(1.05);
+}
+
+.yap-icon-picker-btn.active {
+    border-color: var(--yap-primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(102, 126, 234, 0.05) 100%);
+    box-shadow: 0 0 0 2px var(--yap-primary);
+}
+
+

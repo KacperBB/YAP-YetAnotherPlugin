@@ -14,9 +14,21 @@ $nested_count = 0;
 if (!empty($group_tables)) {
     // Krok 1: Zbierz wszystkie grupy
     foreach ($group_tables as $table) {
-        $table_name = array_values((array)$table)[0];
+        // Obsługa obu formatów: object z table_name/group_name LUB stary format
+        if (isset($table->table_name)) {
+            $table_name = $table->table_name;
+            $display_name = $table->group_name;
+        } else {
+            $table_name = array_values((array)$table)[0];
+            // Obsługa obu formatów: wp_yap_* (nowy) i wp_group_* (stary)
+            if (preg_match('/^wp_yap_(.*?)_pattern$/', $table_name, $matches)) {
+                $display_name = $matches[1];
+            } else {
+                $display_name = preg_replace('/^wp_group_(.*?)_pattern$/', '$1', $table_name);
+            }
+        }
+        
         if (strpos($table_name, 'pattern') !== false) {
-            $display_name = preg_replace('/^wp_group_(.*?)_pattern$/', '$1', $table_name);
             $is_nested = strpos($display_name, 'nested_group_') === 0;
             
             $all_groups[$table_name] = [
@@ -32,25 +44,53 @@ if (!empty($group_tables)) {
         }
     }
     
-    // Krok 2: Znajdź relacje rodzic-dziecko (sprawdzaj WSZYSTKIE grupy, nie tylko główne)
+    // Krok 2: Znajdź relacje rodzic-dziecko
     foreach ($all_groups as $table_name => $group) {
-        // Sprawdź pola nested_group w każdej grupie (głównej i zagnieżdżonej)
-        $fields = $wpdb->get_results($wpdb->prepare(
-            "SELECT nested_field_ids FROM {$table_name} WHERE field_type = %s AND nested_field_ids IS NOT NULL",
-            'nested_group'
-        ));
-        
-        foreach ($fields as $field) {
-            if (!empty($field->nested_field_ids)) {
-                $nested_ids = json_decode($field->nested_field_ids, true);
-                if (is_array($nested_ids)) {
-                    foreach ($nested_ids as $nested_table) {
-                        if (isset($all_groups[$nested_table])) {
-                            if (!isset($nested_relationships[$table_name])) {
-                                $nested_relationships[$table_name] = [];
+        // STARY SYSTEM: Sprawdź pola nested_group w tabelach
+        $table_exists = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name));
+        if ($table_exists === $table_name) {
+            $fields = $wpdb->get_results($wpdb->prepare(
+                "SELECT nested_field_ids FROM {$table_name} WHERE field_type = %s AND nested_field_ids IS NOT NULL",
+                'nested_group'
+            ));
+            
+            foreach ($fields as $field) {
+                if (!empty($field->nested_field_ids)) {
+                    $nested_ids = json_decode($field->nested_field_ids, true);
+                    if (is_array($nested_ids)) {
+                        foreach ($nested_ids as $nested_table) {
+                            if (isset($all_groups[$nested_table])) {
+                                if (!isset($nested_relationships[$table_name])) {
+                                    $nested_relationships[$table_name] = [];
+                                }
+                                $nested_relationships[$table_name][] = $nested_table;
                             }
-                            $nested_relationships[$table_name][] = $nested_table;
                         }
+                    }
+                }
+            }
+        }
+        
+        // NOWY SYSTEM (Visual Builder): Sprawdź JSON schema dla group/repeater z sub_fields
+        $schema_file = WP_CONTENT_DIR . '/yap-schemas/' . $group['display'] . '.json';
+        if (file_exists($schema_file)) {
+            $schema_json = file_get_contents($schema_file);
+            $schema = json_decode($schema_json, true);
+            
+            if (isset($schema['fields']) && is_array($schema['fields'])) {
+                foreach ($schema['fields'] as $field) {
+                    // Sprawdź czy pole jest kontenerem z zagnieżdżonymi polami
+                    if (in_array($field['type'], ['group', 'repeater']) && 
+                        isset($field['sub_fields']) && 
+                        is_array($field['sub_fields']) && 
+                        count($field['sub_fields']) > 0) {
+                        
+                        // Dla Visual Builder zapisz jako "virtual nested" - nie ma osobnej tabeli
+                        if (!isset($nested_relationships[$table_name])) {
+                            $nested_relationships[$table_name] = [];
+                        }
+                        // Dodaj marker że ta grupa ma zagnieżdżone pola
+                        $nested_relationships[$table_name][] = '__has_nested_fields__';
                     }
                 }
             }

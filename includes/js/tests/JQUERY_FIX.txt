@@ -1,0 +1,125 @@
+🔧 JQUERY FIX - INSTRUKCJA NAPRAWY
+
+================================================
+
+PROBLEM: $ is not a function
+──────────────────────────────
+jQuery nie jest dostępne kiedy test się uruchamia.
+
+ROZWIĄZANIE:
+============
+
+✅ JUŻ ZROBIONE:
+
+1. Dodano jQuery check w test files:
+   - visual-builder-field-editing.test.js
+   - visual-builder-advanced.test.js
+
+2. Dodano auto-wait dla jQuery:
+   - Jeśli jQuery nie załadował się
+   - Czekamy aż się załaduje
+   - Potem uruchamiamy test
+
+3. Developer overlay czeka na jQuery
+
+================================================
+
+🚀 CO ROBIĆ TERAZ?
+
+1. Odśwież stronę:
+   Ctrl+Shift+R
+
+2. Czekaj 2-3 sekundy
+
+3. Otwórz Visual Builder
+
+4. F12 → Console
+
+5. Sprawdzaj logów:
+   - "jQuery loaded!" - OK
+   - "Waiting for jQuery..." - Czeka
+
+6. Kliknij test button w overlay 🧪
+
+7. W Console powinny pojawić się wyniki:
+   ✅ test passed
+   ❌ test failed
+
+================================================
+
+✅ CZEKI:
+
+1. Czy jQuery załadował się?
+   W Console: typeof jQuery
+   Powinno: "function"
+
+2. Czy testy załadowały się?
+   W Console: typeof YAPBuilderTests
+   Powinno: "function"
+
+3. Czy overlay widoczny?
+   Szukaj kółka 🧪 w prawym dolnym rogu
+
+================================================
+
+🐛 JEŚLI DALEJ BŁĘDY:
+
+1. Network tab (F12 → Network):
+   - jquery załadowało się? (status 200)
+   - test-config.js załadowało się? (status 200)
+   - visual-builder-field-editing.test.js załadowało się? (status 200)
+
+2. Console (F12 → Console):
+   - Czy są inne błędy JS?
+   - Które? Skopiuj tekst błędu
+
+3. Sprawdzaj czy paths są okej:
+   Powinno być: /includes/js/tests/...
+   Nie: /js/tests/...
+
+================================================
+
+💡 DEBUG COMMANDS:
+
+W Console możesz uruchomić:
+
+// Sprawdź jQuery
+typeof jQuery
+typeof $
+window.jQuery
+
+// Sprawdź testy
+typeof YAPBuilderTests
+typeof YAPAdvancedTests
+typeof YAPTestConfig
+
+// Uruchom test
+YAPBuilderTests.runAll()
+
+// Sprawdzaj overlay
+YAPDevTools.toggle()
+YAPDevTools.runAllTests()
+
+================================================
+
+📊 EXPECTED OUTPUT:
+
+Jeśli wszystko działa, będzie:
+
+Console:
+🧪 Test 1: Otwieranie modalu edycji pola
+✅ PASS: Istnieje co najmniej jedno pole w builderze
+✅ PASS: Modal był dodany do DOM
+✅ PASS: Modal jest widoczny
+...
+✅ Przeszły: 15
+❌ Nie przeszły: 0
+📊 Razem testów: 15
+🎉 Wszystkie testy przeszły!
+📈 Wskaźnik sukcesu: 100%
+
+================================================
+
+✨ GOTOWE!
+
+Sprawdzaj Console i czekaj na wyniki testów.

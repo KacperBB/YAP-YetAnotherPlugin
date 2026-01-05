@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker Preview - YAP Plugin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --yap-primary: #667eea;
+            --yap-primary-dark: #5568d3;
+            --yap-primary-light: #7c94f5;
+            --yap-success: #48bb78;
+            --yap-danger: #f56565;
+            --yap-warning: #ed8936;
+            --yap-gray-50: #f9fafb;
+            --yap-gray-100: #f3f4f6;
+            --yap-gray-200: #e5e7eb;
+            --yap-gray-300: #d1d5db;
+            --yap-gray-600: #4b5563;
+            --yap-gray-700: #374151;
+            --yap-gray-900: #111827;
+            --yap-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --yap-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --yap-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --yap-radius: 8px;
+            --yap-radius-lg: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--yap-gray-50);
+            color: var(--yap-gray-900);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--yap-primary);
+        }
+
+        h1 {
+            font-size: 32px;
+            color: var(--yap-gray-900);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--yap-gray-600);
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: var(--yap-radius-lg);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--yap-shadow);
+        }
+
+        .demo-section h2 {
+            font-size: 20px;
+            color: var(--yap-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--yap-gray-100);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--yap-gray-700);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Color Picker - shadcn/ui Style */
+        input[type="color"],
+        .yap-metabox-field input[type="color"] {
+            display: inline-block;
+            width: 48px;
+            height: 40px;
+            padding: 2px;
+            border: 2px solid var(--yap-gray-200);
+            border-radius: var(--yap-radius);
+            cursor: pointer;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        input[type="color"]:hover,
+        .yap-metabox-field input[type="color"]:hover {
+            border-color: var(--yap-gray-300);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        input[type="color"]:focus,
+        .yap-metabox-field input[type="color"]:focus {
+            outline: none;
+            border-color: var(--yap-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Color Picker Wrapper - for better UX */
+        .yap-color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .yap-color-picker-wrapper label {
+            margin-bottom: 0;
+            font-weight: 500;
+            color: var(--yap-gray-700);
+        }
+
+        .yap-color-picker-wrapper input[type="color"] {
+            flex-shrink: 0;
+        }
+
+        .yap-color-value {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            height: 40px;
+            border-radius: var(--yap-radius);
+            border: 1px solid var(--yap-gray-200);
+            background-color: var(--yap-gray-50);
+            transition: all 0.2s ease;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            color: var(--yap-gray-600);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .comparison-item {
+            padding: 20px;
+            background: var(--yap-gray-50);
+            border-radius: var(--yap-radius);
+            border: 1px solid var(--yap-gray-200);
+        }
+
+        .comparison-item h3 {
+            font-size: 14px;
+            color: var(--yap-gray-700);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .comparison-item pre {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.4;
+            border: 1px solid var(--yap-gray-200);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--yap-gray-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--yap-success);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .state-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .state-box {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--yap-gray-200);
+            border-radius: var(--yap-radius);
+            text-align: center;
+        }
+
+        .state-box h3 {
+            font-size: 12px;
+            color: var(--yap-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .state-box .color-demo {
+            display: inline-block;
+            width: 48px;
+            height: 40px;
+            border: 2px solid var(--yap-gray-200);
+            border-radius: var(--yap-radius);
+            margin-bottom: 10px;
+        }
+
+        .state-box.normal .color-demo {
+            border-color: var(--yap-gray-200);
+            box-shadow: none;
+        }
+
+        .state-box.hover .color-demo {
+            border-color: var(--yap-gray-300);
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        .state-box.focus .color-demo {
+            border-color: var(--yap-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        code {
+            background: var(--yap-gray-100);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--yap-gray-700);
+        }
+
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .state-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .demo-section {
+                padding: 20px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--yap-gray-200);
+            color: var(--yap-gray-600);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Color Picker Preview</h1>
+            <p class="subtitle">shadcn/ui Style Implementation for YAP Plugin</p>
+        </header>
+
+        <!-- Basic Demo -->
+        <div class="demo-section">
+            <h2>Basic Color Picker</h2>
+            
+            <div class="form-group">
+                <label>Select a Color</label>
+                <div class="yap-color-picker-wrapper">
+                    <input type="color" id="color1" value="#667eea" />
+                    <span class="yap-color-value" id="color1-value">#667EEA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multiple Examples -->
+        <div class="demo-section">
+            <h2>Multiple Color Fields</h2>
+            
+            <div class="form-group">
+                <label>Primary Color</label>
+                <div class="yap-color-picker-wrapper">
+                    <input type="color" id="color2" value="#667eea" />
+                    <span class="yap-color-value" id="color2-value">#667EEA</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Secondary Color</label>
+                <div class="yap-color-picker-wrapper">
+                    <input type="color" id="color3" value="#48bb78" />
+                    <span class="yap-color-value" id="color3-value">#48BB78</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Accent Color</label>
+                <div class="yap-color-picker-wrapper">
+                    <input type="color" id="color4" value="#f56565" />
+                    <span class="yap-color-value" id="color4-value">#F56565</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive States -->
+        <div class="demo-section">
+            <h2>Interactive States</h2>
+            <p style="color: var(--yap-gray-600); margin-bottom: 20px;">Hover over or click on the color pickers to see different states</p>
+            
+            <div class="state-showcase">
+                <div class="state-box normal">
+                    <h3>Normal State</h3>
+                    <div class="color-demo" style="background: white;"></div>
+                    <p style="font-size: 12px; color: var(--yap-gray-600);">Border: #d1d5db</p>
+                </div>
+
+                <div class="state-box hover">
+                    <h3>Hover State</h3>
+                    <div class="color-demo" style="background: white;"></div>
+                    <p style="font-size: 12px; color: var(--yap-gray-600);">Border: #d1d5db + glow</p>
+                </div>
+
+                <div class="state-box focus">
+                    <h3>Focus State</h3>
+                    <div class="color-demo" style="background: white;"></div>
+                    <p style="font-size: 12px; color: var(--yap-gray-600);">Border: #667eea + glow</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="demo-section">
+            <h2>Features</h2>
+            <ul class="feature-list">
+                <li>Modern shadcn/ui design</li>
+                <li>Real-time hex value display</li>
+                <li>Smooth transitions and animations</li>
+                <li>Responsive design</li>
+                <li>Keyboard accessible</li>
+                <li>Works in metabox, repeater, and group fields</li>
+                <li>Consistent with theme variables</li>
+                <li>Cross-browser compatible</li>
+            </ul>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="demo-section">
+            <h2>Implementation</h2>
+            
+            <div class="comparison">
+                <div class="comparison-item">
+                    <h3>✗ Before</h3>
+                    <pre>&lt;input type="color" 
+    value="#000000" 
+    style="width: 100px; 
+           height: 40px;"&gt;</pre>
+                </div>
+
+                <div class="comparison-item">
+                    <h3>✓ After</h3>
+                    <pre>&lt;div class="yap-color-picker-wrapper"&gt;
+  &lt;input type="color" 
+      value="#000000" /&gt;
+  &lt;span class="yap-color-value"&gt;
+    #000000
+  &lt;/span&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: var(--yap-gray-50); border-radius: var(--yap-radius); border-left: 4px solid var(--yap-primary);">
+                <p style="margin: 0; color: var(--yap-gray-700);">
+                    <strong>CSS Classes:</strong> <code>.yap-color-picker-wrapper</code>, <code>input[type="color"]</code>, <code>.yap-color-value</code>
+                </p>
+            </div>
+        </div>
+
+        <!-- Browser Support -->
+        <div class="demo-section">
+            <h2>Browser Support</h2>
+            <ul class="feature-list">
+                <li>Chrome/Chromium 88+</li>
+                <li>Firefox 85+</li>
+                <li>Safari 14+</li>
+                <li>Edge 88+</li>
+                <li>iOS Safari 14+</li>
+                <li>Chrome Android</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>YAP Plugin Color Picker Preview | Responsive Design Demo</p>
+            <p style="margin-top: 10px; color: var(--yap-gray-500);">All colors use theme variables from <code>admin-style.css</code></p>
+        </footer>
+    </div>
+
+    <script>
+        // Update color values in real-time
+        function setupColorPicker(inputId, displayId) {
+            const input = document.getElementById(inputId);
+            const display = document.getElementById(displayId);
+            
+            if (!input || !display) return;
+            
+            const updateDisplay = () => {
+                display.textContent = input.value.toUpperCase();
+            };
+            
+            input.addEventListener('input', updateDisplay);
+            input.addEventListener('change', updateDisplay);
+        }
+
+        // Initialize all color pickers
+        document.addEventListener('DOMContentLoaded', () => {
+            setupColorPicker('color1', 'color1-value');
+            setupColorPicker('color2', 'color2-value');
+            setupColorPicker('color3', 'color3-value');
+            setupColorPicker('color4', 'color4-value');
+        });
+    </script>
+</body>
+</html>

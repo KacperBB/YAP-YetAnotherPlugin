@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Plugin 1.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-05 16:20:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/theme-json.php:136
+msgid "YAP Patterns"
+msgstr ""
+
+#: includes/live-preview.php:202
+msgid "Loading preview..."
+msgstr ""
+
+#: includes/live-preview.php:203
+msgid "Preview failed to load"
+msgstr ""
+
+#: includes/live-preview.php:204
+msgid "Please select a template"
+msgstr ""
+
+#: includes/live-preview.php:205
+msgid "Template saved!"
+msgstr ""
+
+# ADMIN STRINGS - Visual Builder
+msgid "Field Settings"
+msgstr ""
+
+msgid "Add Field"
+msgstr ""
+
+msgid "Edit Field"
+msgstr ""
+
+msgid "Delete Field"
+msgstr ""
+
+msgid "Field Name"
+msgstr ""
+
+msgid "Field Label"
+msgstr ""
+
+msgid "Field Type"
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "Placeholder"
+msgstr ""
+
+msgid "Default Value"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "CSS Class"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Add Group"
+msgstr ""
+
+msgid "Edit Group"
+msgstr ""
+
+msgid "Delete Group"
+msgstr ""
+
+msgid "Group Name"
+msgstr ""
+
+msgid "Group Label"
+msgstr ""
+
+msgid "Add Field to Group"
+msgstr ""
+
+msgid "Tab Navigation"
+msgstr ""
+
+msgid "Tab Name"
+msgstr ""
+
+msgid "Tab Label"
+msgstr ""
+
+msgid "Conditional Logic"
+msgstr ""
+
+msgid "Show/Hide Rules"
+msgstr ""
+
+msgid "Repeater"
+msgstr ""
+
+msgid "Add Repeater Row"
+msgstr ""
+
+msgid "Remove Repeater Row"
+msgstr ""
+
+# MESSAGES
+msgid "Settings saved successfully"
+msgstr ""
+
+msgid "Error saving settings"
+msgstr ""
+
+msgid "Field deleted"
+msgstr ""
+
+msgid "Group deleted"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Confirm delete"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No fields found"
+msgstr ""
+
+msgid "No groups found"
+msgstr ""

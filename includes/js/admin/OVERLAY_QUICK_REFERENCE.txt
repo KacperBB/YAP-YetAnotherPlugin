@@ -1,0 +1,84 @@
+🧪 YAP DEVELOPER OVERLAY - QUICK REFERENCE
+
+═══════════════════════════════════════════════
+
+📍 GDZIE JEST?
+  Prawym dolnym rogu admin panelu
+  Kółko: 🧪
+
+⚡ CO ROBI?
+  Klik → Menu z przyciskami testów
+  
+  ▶️  Run All Tests (21 testów)
+  📝 Basic Tests (15 testów)
+  ⚡ Advanced Tests (6 testów)
+  🎯 Test Runner Dashboard
+
+═══════════════════════════════════════════════
+
+🚀 SZYBKI START:
+
+1. Ctrl+Shift+R (odśwież)
+2. Szukaj kółka 🧪 (prawy dolny róg)
+3. Kliknij
+4. Kliknij "Run All Tests"
+5. F12 → Console (zobacz wyniki)
+
+═══════════════════════════════════════════════
+
+⌨️  CONSOLE COMMANDS:
+
+YAPDevTools.runAllTests()
+YAPDevTools.runBasicTests()
+YAPDevTools.runAdvancedTests()
+YAPDevTools.openTestRunner()
+YAPDevTools.toggle()
+
+═══════════════════════════════════════════════
+
+🐛 JEŚLI OVERLAY NIE WIDAĆ:
+
+1. WP_DEBUG = true? (wp-config.php)
+2. Jesteś admin?
+3. Ctrl+Shift+R ?
+4. F12 → Console (błędy?)
+
+═══════════════════════════════════════════════
+
+✅ CZYM SĄ TESTY?
+
+BASIC (15):
+  Field name/label/type/required
+  Placeholder/default value
+  Description/CSS class
+  Conditional logic
+  Modal operations
+
+ADVANCED (6):
+  Kombinacje opcji
+  Logika warunkowa
+  Zagnieżdżone pola
+  Special characters
+  Rapid changes
+
+═══════════════════════════════════════════════
+
+📊 WYNIKI:
+
+W Console (F12):
+✅ passed tests
+❌ failed tests
+ℹ️  info
+
+Lub w Test Runner Dashboard
+
+═══════════════════════════════════════════════
+
+💡 TIPS:
+
+✓ Overlay działa wszędzie w admin
+✓ Testy w Visual Builder
+✓ Wyniki w Console (F12)
+✓ Standalone runner otwiera popup
+
+═══════════════════════════════════════════════

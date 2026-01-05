@@ -1,0 +1,83 @@
+name: 🌐 Translation Management (Local Only)
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'includes/**/*.php'
+      - 'languages/yap.pot'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  translations:
+    name: 📋 Generate & Compile Translations
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Setup WP CLI
+        run: |
+          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+          chmod +x wp-cli.phar
+          sudo mv wp-cli.phar /usr/local/bin/wp
+          wp --version
+      
+      - name: Install gettext tools
+        run: sudo apt-get install -y gettext
+      
+      - name: Generate .pot template
+        run: |
+          wp i18n make-pot . languages/yap.pot \
+            --exclude=node_modules,tests,old_version,.git,.github,vendor
+          echo "✅ Generated languages/yap.pot"
+      
+      - name: Compile .po files to .mo
+        run: |
+          for po_file in languages/*.po; do
+            if [ -f "$po_file" ]; then
+              wp i18n make-mo "$po_file" --mo-location=languages/
+              lang=$(basename "$po_file" .po)
+              echo "✅ Compiled: $lang"
+            fi
+          done
+      
+      - name: Validate .po files
+        run: |
+          echo "📊 Validation Results:"
+          for po_file in languages/*.po; do
+            if [ -f "$po_file" ]; then
+              echo ""
+              echo "Checking: $(basename $po_file)"
+              msgfmt -c -o /dev/null "$po_file" && echo "✅ Syntax OK" || echo "❌ Syntax Error"
+              
+              total=$(grep -c "^msgid " "$po_file" || true)
+              translated=$(grep -c 'msgstr "[^"]' "$po_file" || true)
+              if [ $total -gt 0 ]; then
+                percent=$((translated * 100 / total))
+                echo "📈 Coverage: $translated/$total ($percent%)"
+              fi
+            fi
+          done
+      
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: '🌐 Update translations (.pot + .mo compiled)'
+          file_pattern: languages/yap.pot languages/*.mo
+          commit_options: '--no-verify'
+          skip_dirty_check: true
+          disable_globbing: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Report
+        run: |
+          echo "✅ Translation workflow completed!"
+          echo ""
+          echo "📂 Files:"
+          ls -lah languages/

@@ -6,7 +6,53 @@ function yap_manage_groups_page_html() {
     }
 
     global $wpdb;
-    $group_tables = $wpdb->get_results("SHOW TABLES LIKE '{$wpdb->prefix}group_%'");
+    
+    // Get groups from multiple sources (same as admin-page.php)
+    $groups = [];
+    
+    // 1. From location_rules
+    $location_groups = $wpdb->get_col(
+        "SELECT DISTINCT group_name FROM {$wpdb->prefix}yap_location_rules WHERE group_name != '' ORDER BY group_name ASC"
+    );
+    $groups = array_merge($groups, $location_groups);
+    
+    // 2. From yap-schemas directory
+    $schema_dir = WP_CONTENT_DIR . '/yap-schemas/';
+    if (file_exists($schema_dir)) {
+        $schema_files = glob($schema_dir . '*.json');
+        foreach ($schema_files as $file) {
+            $groups[] = basename($file, '.json');
+        }
+    }
+    
+    // 3. From existing wp_yap_* tables
+    $yap_tables = $wpdb->get_col("SHOW TABLES LIKE '{$wpdb->prefix}yap_%_pattern'");
+    $system_tables = ['location', 'options', 'field', 'sync', 'data', 'query', 'automations', 'automation'];
+    
+    foreach ($yap_tables as $table) {
+        if (preg_match('/^' . $wpdb->prefix . 'yap_(.+)_pattern$/', $table, $matches)) {
+            $group_name = $matches[1];
+            if (!in_array($group_name, $system_tables)) {
+                $groups[] = $group_name;
+            }
+        }
+    }
+    
+    // Unique and sort
+    $groups = array_unique($groups);
+    sort($groups);
+    
+    // Format for display
+    $group_tables = [];
+    foreach ($groups as $group_name) {
+        if (!empty($group_name) && $group_name !== '__unconfigured__') {
+            $table_name = $wpdb->prefix . 'yap_' . $group_name . '_pattern';
+            $group_tables[] = (object)[
+                'table_name' => $table_name,
+                'display_name' => $group_name
+            ];
+        }
+    }
 
     ?>
     <div class="wrap">
@@ -24,19 +70,28 @@ function yap_manage_groups_page_html() {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($group_tables as $table): ?>
-                        <?php $table_name = array_values((array)$table)[0]; ?>
-                        <?php if (strpos($table_name, 'pattern') !== false): ?>
-                            <?php $display_name = preg_replace('/^' . preg_quote($wpdb->prefix, '/') . 'group_(.*?)_pattern$/', '$1', $table_name); ?>
+                    <?php if (empty($group_tables)): ?>
+                        <tr>
+                            <td colspan="2" style="text-align: center; padding: 40px; color: #999;">
+                                <span class="dashicons dashicons-info" style="font-size: 48px; opacity: 0.3;"></span>
+                                <p style="margin: 10px 0 0;">Brak grup. Utwórz nową grupę w <a href="<?php echo admin_url('admin.php?page=yap-admin-page'); ?>">panelu głównym</a> lub <a href="<?php echo admin_url('admin.php?page=yap-visual-builder'); ?>">Visual Builder</a>.</p>
+                            </td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($group_tables as $table): ?>
                             <tr>
-                                <td><?php echo esc_html($display_name); ?></td>
                                 <td>
-                                    <a href="<?php echo admin_url('admin.php?page=yap-edit-group&table=' . urlencode($table_name)); ?>">Edytuj</a> |
-                                    <a href="<?php echo admin_url('admin.php?page=yap-delete-group&table=' . urlencode($table_name)); ?>" onclick="return confirm('Czy na pewno chcesz usunąć tę grupę?');">Usuń</a>
+                                    <strong><?php echo esc_html(ucwords(str_replace('_', ' ', $table->display_name))); ?></strong>
+                                    <br><code style="font-size: 11px; color: #999;"><?php echo esc_html($table->table_name); ?></code>
+                                </td>
+                                <td>
+                                    <a href="<?php echo admin_url('admin.php?page=yap-edit-group&table=' . urlencode($table->table_name)); ?>" class="button button-small">✏️ Edytuj Pola</a>
+                                    <a href="<?php echo admin_url('admin.php?page=yap-visual-builder&group=' . urlencode($table->display_name)); ?>" class="button button-small">🎨 Visual Builder</a>
+                                    <a href="#" class="button button-small button-link-delete yap-manage-delete-group" data-group="<?php echo esc_attr($table->display_name); ?>" data-table="<?php echo esc_attr($table->table_name); ?>">🗑️ Usuń</a>
                                 </td>
                             </tr>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -78,7 +133,8 @@ function yap_manage_groups_page_html() {
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        jQuery(document).ready(function($) {
+            // Tabs switching
             const tabs = document.querySelectorAll('.nav-tab');
             const contents = document.querySelectorAll('.tab-content');
 
@@ -92,6 +148,75 @@ function yap_manage_groups_page_html() {
                     const target = document.querySelector(tab.getAttribute('href'));
                     target.style.display = 'block';
                 });
+            });
+            
+            // Delete group handler
+            $(document).on('click', '.yap-manage-delete-group', function(e) {
+                e.preventDefault();
+                
+                const $link = $(this);
+                const groupName = $link.data('group');
+                const tableName = $link.data('table');
+                
+                // Użyj modalu z Visual Builder jeśli dostępny
+                if (window.YAPBuilderExt && window.YAPBuilderExt.showDeleteModal) {
+                    window.YAPBuilderExt.showDeleteModal(
+                        tableName,
+                        'grupę "' + groupName + '"',
+                        function() {
+                            // On confirm callback
+                            $.ajax({
+                                url: yap_ajax.ajax_url,
+                                type: 'POST',
+                                data: {
+                                    action: 'yap_delete_group',
+                                    nonce: yap_ajax.nonce,
+                                    table: tableName,
+                                    group_name: groupName
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        window.YAPBuilderExt.toast(response.data.message, 'success');
+                                        // Reload page to refresh list
+                                        setTimeout(() => location.reload(), 800);
+                                    } else {
+                                        window.YAPBuilderExt.toast(response.data.message, 'error');
+                                    }
+                                },
+                                error: function() {
+                                    window.YAPBuilderExt.toast('Wystąpił błąd podczas usuwania grupy', 'error');
+                                }
+                            });
+                        }
+                    );
+                } else {
+                    // Fallback do confirm jeśli modal niedostępny
+                    if (!confirm('⚠️ Czy na pewno chcesz usunąć grupę "' + groupName + '"?\n\nUsunięte zostaną:\n- Wszystkie pola\n- Zagnieżdżone grupy\n- Dane w postach\n\nTej operacji nie można cofnąć!')) {
+                        return;
+                    }
+                    
+                    $.ajax({
+                        url: yap_ajax.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'yap_delete_group',
+                            nonce: yap_ajax.nonce,
+                            table: tableName,
+                            group_name: groupName
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                alert('✅ ' + response.data.message);
+                                location.reload();
+                            } else {
+                                alert('❌ ' + response.data.message);
+                            }
+                        },
+                        error: function() {
+                            alert('❌ Wystąpił błąd podczas usuwania grupy');
+                        }
+                    });
+                }
             });
         });
     </script>

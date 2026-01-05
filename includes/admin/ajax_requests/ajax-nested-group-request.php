@@ -3,7 +3,7 @@
 function yap_add_nested_group($parent_table, $parent_field_id) {
     global $wpdb;
 
-    $nested_group_name = 'nested_group_' . time();
+    $nested_group_name = 'nested_group_' . uniqid('', true);
     $nested_tables = yap_create_dynamic_table($nested_group_name);
     
     if (!$nested_tables || !isset($nested_tables['pattern_table'])) {
@@ -57,7 +57,7 @@ function yap_add_nested_group_ajax() {
     }
 
     // Tworzymy nową tabelę dla zagnieżdżonej grupy
-    $nested_group_name = 'nested_group_' . time();
+    $nested_group_name = 'nested_group_' . uniqid('', true);
     $nested_table_name = yap_create_dynamic_table($nested_group_name)['pattern_table'];
 
     if (!$nested_table_name) {

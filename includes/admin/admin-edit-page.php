@@ -10,7 +10,78 @@ function yap_edit_group_page_html() {
     error_log("🟢 GET table: " . ($_GET['table'] ?? 'NOT SET'));
 
     global $wpdb;
-    $table_name = sanitize_text_field($_GET['table']);
+    $table_name = isset($_GET['table']) ? sanitize_text_field($_GET['table']) : '';
+    
+    // Check if this is a new-style group (no table, only JSON schema)
+    if (empty($table_name) || !$wpdb->get_var("SHOW TABLES LIKE '$table_name'")) {
+        // Try to extract group name from table parameter
+        if (preg_match('/^' . $wpdb->prefix . 'yap_(.+)_pattern$/', $table_name, $matches)) {
+            $group_name = $matches[1];
+        } else {
+            $group_name = str_replace([$wpdb->prefix . 'yap_', '_pattern'], '', $table_name);
+        }
+        
+        // Check if JSON schema exists
+        $schema_file = WP_CONTENT_DIR . '/yap-schemas/' . $group_name . '.json';
+        
+        if (file_exists($schema_file)) {
+            ?>
+            <div class="wrap">
+                <h1>Edytuj Grupę: <?php echo esc_html(ucwords(str_replace('_', ' ', $group_name))); ?></h1>
+                <div class="notice notice-info">
+                    <p><strong>ℹ️ Ta grupa została utworzona w Visual Builder</strong></p>
+                    <p>Aby edytować pola tej grupy, użyj Visual Buildera:</p>
+                    <p>
+                        <a href="<?php echo admin_url('admin.php?page=yap-visual-builder&group=' . urlencode($group_name)); ?>" class="button button-primary">
+                            🎨 Otwórz w Visual Builder
+                        </a>
+                        <a href="<?php echo admin_url('admin.php?page=yap-manage-groups'); ?>" class="button">
+                            ← Powrót do Listy Grup
+                        </a>
+                    </p>
+                </div>
+                
+                <div class="yap-card" style="margin-top: 20px;">
+                    <h2>📋 Podgląd Pól</h2>
+                    <?php
+                    $schema = json_decode(file_get_contents($schema_file), true);
+                    if (!empty($schema['fields'])) {
+                        echo '<table class="wp-list-table widefat fixed striped">';
+                        echo '<thead><tr><th>Pole</th><th>Typ</th><th>Wymagane</th></tr></thead>';
+                        echo '<tbody>';
+                        foreach ($schema['fields'] as $field) {
+                            echo '<tr>';
+                            echo '<td><strong>' . esc_html($field['label']) . '</strong><br><code>' . esc_html($field['name']) . '</code></td>';
+                            echo '<td>' . esc_html($field['type']) . '</td>';
+                            echo '<td>' . ($field['required'] ? '✓ Tak' : '—') . '</td>';
+                            echo '</tr>';
+                        }
+                        echo '</tbody>';
+                        echo '</table>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <?php
+            return;
+        } else {
+            ?>
+            <div class="wrap">
+                <h1>❌ Grupa nie znaleziona</h1>
+                <div class="notice notice-error">
+                    <p><strong>Nie można znaleźć grupy:</strong> <?php echo esc_html($group_name); ?></p>
+                    <p>Tabela: <code><?php echo esc_html($table_name); ?></code> nie istnieje.</p>
+                    <p>
+                        <a href="<?php echo admin_url('admin.php?page=yap-manage-groups'); ?>" class="button button-primary">
+                            ← Powrót do Listy Grup
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <?php
+            return;
+        }
+    }
     
     // 🚨 BLOKADA: Nie pozwalaj edytować tabel _data bezpośrednio!
     if (strpos($table_name, '_data') !== false) {

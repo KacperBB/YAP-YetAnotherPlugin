@@ -1,0 +1,152 @@
+🎯 DEVELOPER OVERLAY - INSTRUKCJA
+
+================================================
+
+✅ CO ZOSTAŁO ZROBIONE:
+
+1. ✅ Naprawiono ścieżki w enqueue.php
+   PRZED: /js/tests/visual-builder-field-editing.test.js
+   PO:    /includes/js/tests/visual-builder-field-editing.test.js
+
+2. ✅ Stworzono Developer Overlay
+   - Kółko 🧪 w prawym dolnym rogu
+   - Menu z przyciskami do testów
+   - Dostęp do Standalone Test Runner
+
+3. ✅ Zintegrowano z WordPress
+   - Ładuje się automatycznie (WP_DEBUG = true)
+   - Widoczne dla adminów
+
+================================================
+
+🚀 JAK UŻYWAĆ:
+
+1. Odśwież stronę admin:
+   Ctrl+Shift+R
+
+2. Szukaj kółka 🧪 w prawym dolnym rogu
+
+3. Kliknij aby otworzyć menu
+
+4. Dostępne opcje:
+   ✓ Run All Tests (15 + 6)
+   ✓ Basic Tests (15)
+   ✓ Advanced Tests (6)
+   ✓ Test Runner Dashboard
+
+================================================
+
+🎮 PRZYCISKI W OVERLAY:
+
+▶️ Run All Tests
+   - Uruchamia wszystkie testy (21)
+   - Logs w Console (F12)
+   - Dla Visual Builder
+
+📝 Basic Tests (15)
+   - Testy podstawowe
+   - Field editing
+   - Modal operations
+
+⚡ Advanced Tests (6)
+   - Testy zaawansowane
+   - Kombinacje opcji
+   - Special cases
+
+🎯 Test Runner Dashboard
+   - Otwiera standalone interface
+   - /includes/js/tests/standalone-runner.html
+   - Nowe okno (popup)
+
+================================================
+
+📍 GDY KLIKNĄŁEŚ TEST:
+
+1. Sprawdź Console (F12 → Console)
+2. Będą się pojawiać logi:
+   ✅ test passed
+   ❌ test failed
+   ℹ️ info messages
+
+3. Po zakończeniu:
+   Pokaże summary: X passed, Y failed
+
+================================================
+
+🔗 KEYBOARD SHORTCUTS:
+
+W Console (F12):
+- YAPDevTools.runAllTests()
+- YAPDevTools.runBasicTests()
+- YAPDevTools.runAdvancedTests()
+- YAPDevTools.openTestRunner()
+- YAPDevTools.toggle()
+
+================================================
+
+⚙️ KONFIGURACJA:
+
+Developer Overlay wymaga:
+- WP_DEBUG = true (w wp-config.php)
+- current_user_can('manage_options') - admin
+
+Aby wyłączyć:
+- Ustaw WP_DEBUG = false
+
+================================================
+
+📂 PLIKI:
+
+Overlay Script:
+  /includes/js/admin/developer-overlay.js
+
+Enqueue (integration):
+  /includes/admin-modules/assets/enqueue.php
+
+Ścieżki testów (naprawione):
+  /includes/js/tests/test-config.js
+  /includes/js/tests/visual-builder-field-editing.test.js
+  /includes/js/tests/visual-builder-advanced.test.js
+
+Standalone Runner:
+  /includes/js/tests/standalone-runner.html
+
+================================================
+
+🐛 TROUBLESHOOTING:
+
+Problemy: Overlay nie widać
+──────────────────────────
+Rozwiązanie:
+1. Sprawdzaj czy WP_DEBUG = true
+2. Czy jesteś zalogowany jako admin?
+3. Odśwież: Ctrl+Shift+R
+4. Sprawdzaj Console (F12) czy są błędy
+
+Problemy: Testy nie uruchamiają się
+────────────────────────────────────
+Rozwiązanie:
+1. Sprawdzaj czy testy załadowały się
+   W Console: typeof YAPBuilderTests
+   Powinno: "function"
+
+2. Jeśli undefined - sprawdzaj Network tab (F12 → Network)
+   Szukaj: visual-builder-field-editing.test.js
+   Status powinien być: 200 (OK)
+
+3. Jeśli 404 - testy nie załadowały
+   Mogą być problemy z ścieżkami
+
+Problemy: 404 dla test-config.js
+────────────────────────────────
+Rozwiązanie: Sprawdzaj czy przeładujesz ze zmianami:
+1. Ctrl+Shift+R (force refresh)
+2. Wyczyść cache przeglądarki
+3. Przycisk F12 → Network → Disable cache (zaznacz)
+
+================================================
+
+✨ GOTOWE!
+
+Overlay powinien być teraz widoczny i działać.
+Kliknij kółko 🧪 aby zobaczyć menu.

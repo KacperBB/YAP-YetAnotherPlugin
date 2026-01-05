@@ -9,11 +9,43 @@
             <th><label for="new_field_type">Typ pola:</label></th>
             <td>
                 <select id="new_field_type" name="new_field_type">
-                    <option value="short_text">Krótki tekst</option>
-                    <option value="long_text">Długi tekst</option>
-                    <option value="number">Liczba</option>
-                    <option value="image">Obraz</option>
-                    <option value="nested_group">Zagnieżdżona grupa</option>
+                    <optgroup label="Podstawowe">
+                        <option value="short_text">Krótki tekst</option>
+                        <option value="long_text">Długi tekst</option>
+                        <option value="number">Liczba</option>
+                        <option value="wysiwyg">WYSIWYG Editor</option>
+                        <option value="oembed">oEmbed (YouTube, Vimeo, etc.)</option>
+                    </optgroup>
+                    <optgroup label="Wybór">
+                        <option value="select">Select (Lista rozwijana)</option>
+                        <option value="checkbox">Checkbox (Wielokrotny wybór)</option>
+                        <option value="radio">Radio (Pojedynczy wybór)</option>
+                        <option value="true_false">True/False (Przełącznik)</option>
+                    </optgroup>
+                    <optgroup label="Data i czas">
+                        <option value="date">Data</option>
+                        <option value="datetime">Data i czas</option>
+                        <option value="time">Czas</option>
+                    </optgroup>
+                    <optgroup label="Media">
+                        <option value="image">Obraz</option>
+                        <option value="file">Plik (PDF, DOC, etc.)</option>
+                        <option value="gallery">Galeria</option>
+                    </optgroup>
+                    <optgroup label="Relacje">
+                        <option value="post_object">Post Object (Wybór posta)</option>
+                        <option value="relationship">Relationship (Wielokrotny wybór postów)</option>
+                        <option value="taxonomy">Taxonomy (Wybór terminu)</option>
+                        <option value="user">User (Wybór użytkownika)</option>
+                    </optgroup>
+                    <optgroup label="Zaawansowane">
+                        <option value="color">Color Picker</option>
+                        <option value="range">Range (Suwak)</option>
+                        <option value="google_map">Google Map</option>
+                        <option value="repeater">Repeater (Powtarzalne pola)</option>
+                        <option value="flexible_content">Flexible Content (Elastyczne układy)</option>
+                        <option value="nested_group">Zagnieżdżona grupa</option>
+                    </optgroup>
                 </select>
             </td>
         </tr>

@@ -32,27 +32,56 @@ function yap_save_group_ajax() {
     $pattern_table = $tables['pattern_table'];
     error_log("✅ Created pattern table: {$pattern_table}");
 
-    // Próba zapisania meta danych grupy w tabeli wzorca
-    $insert_result = $wpdb->insert(
-        $pattern_table,
-        [
-            'generated_name' => 'group_meta',
-            'user_name' => $group_name,
-            'field_type' => 'meta',
-            'field_value' => json_encode([
-                'post_type' => $post_type,
-                'category' => $category
-            ]),
-            'field_depth' => 0,
-            'nested_field_ids' => null
-        ]
-    );
+    // Check if group_meta already exists for this group
+    $existing_meta = $wpdb->get_row($wpdb->prepare(
+        "SELECT id FROM {$pattern_table} WHERE generated_name = 'group_meta' AND user_name = %s",
+        $group_name
+    ));
 
-    if (!$insert_result) {
-        $db_error = $wpdb->last_error;
-        error_log("🚨 Error inserting group metadata into pattern table {$pattern_table}. DB Error: {$db_error}");
-        wp_send_json_error("Failed to insert group metadata into the pattern table.");
-        return;
+    if ($existing_meta) {
+        // Update existing group_meta
+        $update_result = $wpdb->update(
+            $pattern_table,
+            [
+                'field_value' => json_encode([
+                    'post_type' => $post_type,
+                    'category' => $category
+                ])
+            ],
+            ['id' => $existing_meta->id]
+        );
+        
+        if ($update_result === false) {
+            $db_error = $wpdb->last_error;
+            error_log("🚨 Error updating group metadata in pattern table {$pattern_table}. DB Error: {$db_error}");
+            wp_send_json_error("Failed to update group metadata in the pattern table.");
+            return;
+        }
+        error_log("✅ Group meta data updated successfully in pattern table: {$pattern_table}");
+    } else {
+        // Insert new group_meta
+        $insert_result = $wpdb->insert(
+            $pattern_table,
+            [
+                'generated_name' => 'group_meta',
+                'user_name' => $group_name,
+                'field_type' => 'meta',
+                'field_value' => json_encode([
+                    'post_type' => $post_type,
+                    'category' => $category
+                ]),
+                'field_depth' => 0,
+                'nested_field_ids' => null
+            ]
+        );
+
+        if (!$insert_result) {
+            $db_error = $wpdb->last_error;
+            error_log("🚨 Error inserting group metadata into pattern table {$pattern_table}. DB Error: {$db_error}");
+            wp_send_json_error("Failed to insert group metadata into the pattern table.");
+            return;
+        }
+        error_log("✅ Group meta data inserted successfully into pattern table: {$pattern_table}");
     }
 
     error_log("✅ Group meta data inserted successfully into pattern table: {$pattern_table}");

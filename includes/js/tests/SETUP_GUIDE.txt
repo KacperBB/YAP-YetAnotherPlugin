@@ -1,0 +1,166 @@
+🚀 SETUP COMPLETE - INSTRUKCJA URUCHOMIENIA
+
+================================================
+
+✅ ZROBILIŚMY:
+
+1. ✅ Auto-Loader PHP (test-auto-loader.php)
+   - Automatycznie ładuje testy w Visual Builder
+   - Dodany do głównego pluginu
+
+2. ✅ Debug Loader (DEBUG_LOADER.txt)
+   - Instrukcja do wklejenia w Console (F12)
+   - Zaawansowane debugowanie
+
+3. ✅ Standalone Test Runner (standalone-runner.html)
+   - Niezależny interfejs testów
+   - Otwiera Visual Builder w oknie popup
+
+================================================
+
+🎯 QUICK START:
+
+METODA 1: Auto-Loader (Najłatwiej) ✨
+────────────────────────────────────
+1. Odśwież stronę Visual Builder: Ctrl+Shift+R
+2. Wpisz w Console (F12):
+   
+   YAPBuilderTests.runAll()
+
+3. Czekaj na wyniki
+
+JEŚLI ZADZIAŁA → Koniec! 🎉
+JEŚLI NIE → Idź do METODY 2
+
+
+METODA 2: Debug + Manual Load
+──────────────────────────────
+1. Otwórz Visual Builder: WordPress → YetAnotherPlugin → Visual Builder
+2. Naciśnij F12 (DevTools)
+3. Idź do Console tab
+4. Wklej kod z: DEBUG_LOADER.txt (w tym folderze)
+5. Wpisz: YAPBuilderTests.runAll()
+
+
+METODA 3: Standalone Runner (Najfajniej)
+──────────────────────────────────────────
+1. Otwórz w przeglądarce:
+   
+   /fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/standalone-runner.html
+
+2. Kliknij "▶️ Run All Tests"
+3. Automatycznie otworzy Visual Builder
+4. Testy uruchomią się w tle
+5. Wyniki pokażą się w tab "📊 Results"
+
+
+================================================
+
+📖 CZYM SĄ TESTY?
+
+15 Basic Tests:
+├─ testOpenFieldSettings - Otwarcie ustawień
+├─ testChangeFieldName - Zmiana nazwy
+├─ testChangeFieldLabel - Zmiana etykiety
+├─ testChangeFieldPlaceholder - Placeholder
+├─ testChangeDefaultValue - Wartość domyślna
+├─ testChangeDescription - Opis pola
+├─ testChangeCSSOClass - CSS Class
+├─ testToggleRequired - Pole wymagane
+├─ testTabSwitching - Przełączanie tab
+├─ testConditionalLogic - Logika warunkowa
+├─ testSaveAndClose - Zapis i zamknięcie
+├─ testCombinedChanges - Zmiana wielu opcji
+├─ testSubFieldEditing - Edycja podpól
+├─ testFieldNameValidation - Walidacja nazwy
+└─ testModalClosing - Zamknięcie modalu
+
+6 Advanced Tests:
+├─ testBasicCombinations - 5 kombinacji opcji
+├─ testConditionalLogicOperators - 6 operatorów
+├─ testNestedFieldsEditing - Zagnieżdżone pola
+├─ testModifyAndRevert - Zapis i wycofanie
+├─ testSpecialCharacters - Znaki specjalne
+└─ testRapidChanges - Szybkie zmiany
+
+
+================================================
+
+🔍 JEŚLI COŚ NIE DZIAŁA:
+
+Problem: "YAPBuilderTests is not defined"
+─────────────────────────────────────────
+Rozwiązanie:
+1. Sprawdzaj Console (F12 → Console)
+2. Czy są błędy? → Sprawdzaj Network tab
+3. Czy test-config.js załadował się? → Sprawdzaj czy plik istnieje
+4. Przeładuj stronę: Ctrl+Shift+R
+5. Jeśli dalej nie działa → wklej DEBUG_LOADER.txt
+
+
+Problem: 404 Not Found dla testów
+──────────────────────────────────
+Rozwiązanie:
+1. Przejdź do: /fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/
+2. Sprawdzaj czy te pliki istnieją:
+   - test-config.js
+   - visual-builder-field-editing.test.js
+   - visual-builder-advanced.test.js
+3. Sprawdzaj Network tab (F12 → Network) by zobaczyć full URL
+
+
+Problem: jQuery nie załadowany
+───────────────────────────────
+Rozwiązanie:
+1. W Console wpisz: typeof jQuery
+2. Powinno zwrócić: "function"
+3. Jeśli zwraca: "undefined" → jQuery nie załadowany
+4. Przeładuj stronę: Ctrl+Shift+R
+
+
+================================================
+
+📁 ŚCIEŻKI PLIKÓW:
+
+Auto-Loader:
+  includes/admin-modules/assets/test-auto-loader.php
+
+Test Files:
+  includes/js/tests/test-config.js
+  includes/js/tests/visual-builder-field-editing.test.js
+  includes/js/tests/visual-builder-advanced.test.js
+
+Standalone Runner:
+  includes/js/tests/standalone-runner.html
+
+Debug Instructions:
+  includes/js/tests/DEBUG_LOADER.txt
+
+
+================================================
+
+💡 WSKAZÓWKI:
+
+✓ Auto-Loader uruchamia się automatycznie
+  - Nie musisz nic robić
+  - Testy powinny załadować się sami
+
+✓ Standalone Runner najlepszy do debugowania
+  - Otwiera Visual Builder w oddzielnym oknie
+  - Pokazuje progress w real-time
+  - Łatwo zobaczyć wyniki
+
+✓ Debug Loader do manualnego załadowania
+  - Gdy auto-loader nie działa
+  - Pokazuje dokładne błędy ładowania
+
+
+================================================
+
+✨ GOTOWE! 
+
+Wybierz metodę uruchomienia powyżej i zacznij testować!
+
+Najłatwiej: Metoda 1 (Auto-Loader)
+Najfajniej: Metoda 3 (Standalone Runner)
+Do debugowania: Metoda 2 (Debug + Manual)

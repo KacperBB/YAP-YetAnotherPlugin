@@ -66,6 +66,20 @@ function yap_add_field_ajax() {
         return;
     }
 
+    // Sprawdź czy pole o takiej nazwie już istnieje
+    $existing = $wpdb->get_var($wpdb->prepare(
+        "SELECT id FROM {$table_name} WHERE user_name = %s",
+        $field_name
+    ));
+    
+    if ($existing) {
+        error_log("🚨 DUPLICATE: Field '{$field_name}' already exists in {$table_name}");
+        wp_send_json_error([
+            'message' => "Pole o nazwie '{$field_name}' już istnieje w tej grupie."
+        ]);
+        return;
+    }
+    
     // Dodanie zwykłego pola
     $result = $wpdb->insert(
         $table_name,
@@ -80,8 +94,9 @@ function yap_add_field_ajax() {
     );
 
     if (!$result) {
-        error_log("🚨 ERROR: Failed to add field to table: {$table_name}");
-        wp_send_json_error("Failed to add field.");
+        $error = $wpdb->last_error;
+        error_log("🚨 ERROR: Failed to add field to table: {$table_name} | Error: {$error}");
+        wp_send_json_error("Failed to add field: {$error}");
     } else {
         $parent_field_id = $wpdb->insert_id; // Pobierz ID wstawionego pola
         wp_send_json_success([

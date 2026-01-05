@@ -1,0 +1,346 @@
+/**
+ * YAP Blocks - Editor Styles
+ * Styles for block editor interface
+ */
+
+/* Block wrapper */
+.yap-block {
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.yap-block-mode-edit {
+    background: #f9f9f9;
+}
+
+.yap-block-mode-preview {
+    background: #fff;
+}
+
+/* Edit mode */
+.yap-block-edit-mode {
+    padding: 1em;
+}
+
+.yap-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #0073aa;
+}
+
+.yap-block-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0073aa;
+}
+
+.yap-block-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #0073aa;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.yap-block-icon .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.yap-block-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.yap-block-field {
+    padding: 0.5em;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.yap-block-field label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1e1e1e;
+}
+
+.yap-block-field input[type="text"],
+.yap-block-field input[type="number"],
+.yap-block-field textarea,
+.yap-block-field select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #8d96a0;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.yap-block-field input[type="text"]:focus,
+.yap-block-field input[type="number"]:focus,
+.yap-block-field textarea:focus,
+.yap-block-field select:focus {
+    border-color: #007cba;
+    outline: 2px solid #007cba;
+    outline-offset: 0;
+}
+
+/* Preview mode */
+.yap-block-preview-mode {
+    min-height: 100px;
+    position: relative;
+}
+
+.yap-block-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    color: #757575;
+}
+
+.yap-block-loading .spinner {
+    margin-bottom: 1em;
+}
+
+.yap-block-loading p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* InnerBlocks */
+.yap-block-inner-blocks {
+    margin-top: 1em;
+    padding: 1em;
+    border: 2px dashed #ddd;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.yap-block-inner-blocks:empty::before {
+    content: 'Add blocks here...';
+    display: block;
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+}
+
+/* Inspector Controls */
+.components-panel__body.is-opened .yap-image-field {
+    margin: 1em 0;
+}
+
+.yap-image-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.yap-image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Block Controls Toolbar */
+.block-editor-block-toolbar .yap-block-mode-toggle {
+    display: flex;
+    gap: 0;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button {
+    padding: 6px 12px;
+    border: 1px solid #1e1e1e;
+    background: #fff;
+    color: #1e1e1e;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button:last-child {
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button.is-active {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button:hover {
+    background: #f0f0f0;
+}
+
+.block-editor-block-toolbar .yap-block-mode-toggle button.is-active:hover {
+    background: #000;
+}
+
+/* Color Picker */
+.components-panel__row .components-color-picker {
+    margin-top: 0.5em;
+}
+
+/* Range Control */
+.components-range-control {
+    margin: 1em 0;
+}
+
+.components-range-control__number {
+    width: 60px !important;
+}
+
+/* Toggle Control */
+.components-toggle-control {
+    margin: 1em 0;
+}
+
+.components-toggle-control .components-base-control__field {
+    margin-bottom: 0;
+}
+
+/* Select Control */
+.components-select-control {
+    margin: 1em 0;
+}
+
+.components-select-control select {
+    width: 100%;
+}
+
+/* Media Upload Button */
+.yap-image-field .components-button {
+    margin-top: 0.5em;
+}
+
+/* Block Validation */
+.yap-block-field.has-error {
+    border-color: #cc1818;
+}
+
+.yap-block-field.has-error label {
+    color: #cc1818;
+}
+
+.yap-block-field-error {
+    margin-top: 0.5em;
+    padding: 0.5em;
+    background: #f8d7da;
+    border: 1px solid #f5c2c7;
+    border-radius: 4px;
+    color: #842029;
+    font-size: 12px;
+}
+
+/* Block Alignments */
+.yap-block.alignwide {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.yap-block.alignfull {
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    width: 100vw;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .yap-block-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+    }
+    
+    .yap-block-icon {
+        align-self: flex-end;
+    }
+}
+
+/* Dark mode support (WordPress 5.9+) */
+@media (prefers-color-scheme: dark) {
+    .yap-block {
+        background: #1e1e1e;
+        border-color: #3c3c3c;
+        color: #fff;
+    }
+    
+    .yap-block-mode-edit {
+        background: #2c2c2c;
+    }
+    
+    .yap-block-field {
+        background: #1e1e1e;
+        border-color: #3c3c3c;
+    }
+    
+    .yap-block-field label {
+        color: #fff;
+    }
+    
+    .yap-block-field input,
+    .yap-block-field textarea,
+    .yap-block-field select {
+        background: #1e1e1e;
+        border-color: #3c3c3c;
+        color: #fff;
+    }
+}
+
+/* Animation */
+@keyframes yap-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.yap-block-preview-mode > * {
+    animation: yap-fade-in 0.3s ease-out;
+}
+
+/* Inspector Panel Improvements */
+.components-panel__body-title button {
+    font-weight: 600;
+}
+
+.components-panel__row {
+    margin: 0.5em 0;
+}
+
+/* Block Inserter */
+.block-editor-inserter__menu .yap-block-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.block-editor-inserter__menu .yap-block-item .dashicons {
+    color: #0073aa;
+}

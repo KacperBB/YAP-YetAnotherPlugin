@@ -1,0 +1,160 @@
+🔧 INSTRUKCJA: Załaduj Testy z Debugowaniem
+
+================================================
+
+PROBLEM: YAPBuilderTests is not defined
+
+ROZWIĄZANIE: Wklej Debug Loader w Console
+
+================================================
+
+KROKI:
+
+1. Otwórz Visual Builder:
+   WordPress Admin → YetAnotherPlugin → 🎨 Visual Builder
+
+2. Naciśnij F12 (DevTools)
+
+3. Kliknij: Console tab
+
+4. Wklej PONIŻSZY KOD:
+
+================================================
+
+(function() {
+    'use strict';
+    
+    console.clear();
+    console.log('%c=== YAP Test Debug & Loader ===', 'color: #0073aa; font-size: 16px; font-weight: bold;');
+    
+    const pathname = window.location.pathname;
+    let baseUrl = '/fagpress';
+    
+    const testFiles = [
+        'test-config.js',
+        'visual-builder-field-editing.test.js',
+        'visual-builder-advanced.test.js'
+    ];
+    
+    const baseTestUrl = baseUrl + '/wp-content/plugins/YetAnotherPlugin/includes/js/tests/';
+    
+    console.log('\n📥 Loading tests from:', baseTestUrl);
+    
+    let loadedCount = 0;
+    let failedCount = 0;
+    
+    function loadTestFile(filename, index) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const fullUrl = baseTestUrl + filename;
+                const script = document.createElement('script');
+                script.src = fullUrl;
+                script.async = false;
+                
+                script.onload = () => {
+                    loadedCount++;
+                    console.log(`✅ ${filename}`);
+                    resolve(true);
+                };
+                
+                script.onerror = () => {
+                    failedCount++;
+                    console.error(`❌ ${filename} - 404 Not Found`);
+                    resolve(false);
+                };
+                
+                document.head.appendChild(script);
+            }, index * 300);
+        });
+    }
+    
+    Promise.all(testFiles.map((file, i) => loadTestFile(file, i)))
+        .then(() => {
+            console.log(`\n📊 Result: ${loadedCount}/${testFiles.length} loaded`);
+            
+            setTimeout(() => {
+                if (typeof window.YAPBuilderTests !== 'undefined') {
+                    console.log('%c✨ SUCCESS! Run: YAPBuilderTests.runAll()', 'color: #46b450; font-weight: bold; font-size: 13px;');
+                } else {
+                    console.error('❌ Tests not available - check Network tab for errors');
+                }
+            }, 1000);
+        });
+})();
+
+================================================
+
+5. Naciśnij: ENTER
+
+6. Czekaj ~2-3 sekundy
+
+7. Po załadowaniu wpisz:
+   YAPBuilderTests.runAll()
+
+================================================
+
+DEBUGOWANIE:
+
+Jeśli testy się nie załadują:
+
+1. Sprawdzaj Console - czy są błędy 404?
+
+2. Sprawdzaj Network tab (F12 → Network):
+   - Szukaj: test-config.js
+   - Szukaj: visual-builder-field-editing.test.js
+   - Szukaj: visual-builder-advanced.test.js
+   
+   Czy zwracają status 404?
+
+3. Jeśli są 404 - sprawdź czy pliki istnieją:
+   /fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/
+
+4. Sprawdzaj czy jQuery jest załadowany:
+   typeof jQuery
+   (powinno zwrócić: "function")
+
+================================================
+
+ALTERNATYWA: Jeśli Debug Loader Nie Działa
+
+Spróbuj tego kodu (prostszy):
+
+(function() {
+    const files = [
+        '/fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/test-config.js',
+        '/fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/visual-builder-field-editing.test.js',
+        '/fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/visual-builder-advanced.test.js'
+    ];
+    
+    let loaded = 0;
+    files.forEach(url => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.onload = () => {
+            console.log('✅ Loaded');
+            if (++loaded === files.length) {
+                console.log('Ready! Run: YAPBuilderTests.runAll()');
+            }
+        };
+        script.onerror = () => console.error('404:', url);
+        document.head.appendChild(script);
+    });
+})();
+
+================================================
+
+JEŚLI WCIĄŻ NIE DZIAŁA:
+
+1. Przełładuj stronę: Ctrl+Shift+R
+
+2. Sprawdzaj czy pliki istnieją w:
+   /wp-content/plugins/YetAnotherPlugin/includes/js/tests/
+
+3. Kontaktuj support z:
+   - Screenshot Network tab (F12 → Network)
+   - Screenshot Console (F12 → Console)
+   - Aktualny URL strony
+
+================================================
+
+✨ GOTOWE!

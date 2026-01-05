@@ -1,0 +1,33 @@
+# Test Infrastructure Files
+tests/coverage/
+.phpunit.result.cache
+.phpunit.cache/
+
+# Test Database
+wordpress_test/
+test_data.sql
+
+# PHP Dependencies
+vendor/
+composer.lock
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Logs
+test-results.log
+test-output.txt
+debug.log
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db

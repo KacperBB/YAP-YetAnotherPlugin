@@ -1,0 +1,51 @@
+# Crowdin Configuration for YAP Plugin
+# https://support.crowdin.com/configuration-file/
+
+files:
+  - source: /languages/yap.pot
+    translation: /languages/yap-%two_letters_code%_%LOCALE%.po
+    languages_mapping:
+      two_letters_code:
+        pl: pl
+        de: de
+        fr: fr
+        es: es
+        en: en
+        it: it
+        ja: ja
+        zh: zh
+        pt: pt
+        ru: ru
+        nl: nl
+
+project_id: YOUR_PROJECT_ID
+base_path: .
+
+# Crowdin file filtering
+exclude:
+  - node_modules
+  - tests
+  - old_version
+  - .git
+  - .github
+  - vendor
+
+# Language mapping
+lang_map:
+  pl_PL: pl
+  de_DE: de
+  fr_FR: fr
+  es_ES: es
+  en_US: en
+  en_GB: en
+  it_IT: it
+  ja_JP: ja
+  zh_CN: zh
+  pt_BR: pt
+  ru_RU: ru
+  nl_NL: nl
+
+# Pull request settings
+pull_request_title: '🌐 New translations from Crowdin'
+pull_request_labels: translations
+auto_approve_imported: false

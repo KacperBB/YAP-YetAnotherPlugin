@@ -1,0 +1,154 @@
+# Polish translation for Yet Another Plugin
+# Copyright (C) 2026 Kacper Borowiec
+# This file is distributed under the same license as the Yet Another Plugin package.
+# Translators: Kacper Borowiec
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Yet Another Plugin 1.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-05 16:20:00+0000\n"
+"PO-Revision-Date: 2026-01-05 16:20:00+0000\n"
+"Last-Translator: Kacper Borowiec <kacper@example.com>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: includes/theme-json.php:136
+msgid "YAP Patterns"
+msgstr "Wzory YAP"
+
+#: includes/live-preview.php:202
+msgid "Loading preview..."
+msgstr "Ładowanie podglądu..."
+
+#: includes/live-preview.php:203
+msgid "Preview failed to load"
+msgstr "Nie udało się załadować podglądu"
+
+#: includes/live-preview.php:204
+msgid "Please select a template"
+msgstr "Proszę wybrać szablon"
+
+#: includes/live-preview.php:205
+msgid "Template saved!"
+msgstr "Szablon zapisany!"
+
+# ADMIN STRINGS - Visual Builder
+msgid "Field Settings"
+msgstr "Ustawienia pola"
+
+msgid "Add Field"
+msgstr "Dodaj pole"
+
+msgid "Edit Field"
+msgstr "Edytuj pole"
+
+msgid "Delete Field"
+msgstr "Usuń pole"
+
+msgid "Field Name"
+msgstr "Nazwa pola"
+
+msgid "Field Label"
+msgstr "Etykieta pola"
+
+msgid "Field Type"
+msgstr "Typ pola"
+
+msgid "Required"
+msgstr "Wymagane"
+
+msgid "Placeholder"
+msgstr "Tekst wskazówki"
+
+msgid "Default Value"
+msgstr "Wartość domyślna"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "CSS Class"
+msgstr "Klasa CSS"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Add Group"
+msgstr "Dodaj grupę"
+
+msgid "Edit Group"
+msgstr "Edytuj grupę"
+
+msgid "Delete Group"
+msgstr "Usuń grupę"
+
+msgid "Group Name"
+msgstr "Nazwa grupy"
+
+msgid "Group Label"
+msgstr "Etykieta grupy"
+
+msgid "Add Field to Group"
+msgstr "Dodaj pole do grupy"
+
+msgid "Tab Navigation"
+msgstr "Nawigacja zakładek"
+
+msgid "Tab Name"
+msgstr "Nazwa zakładki"
+
+msgid "Tab Label"
+msgstr "Etykieta zakładki"
+
+msgid "Conditional Logic"
+msgstr "Logika warunkowa"
+
+msgid "Show/Hide Rules"
+msgstr "Reguły pokaż/ukryj"
+
+msgid "Repeater"
+msgstr "Repeater"
+
+msgid "Add Repeater Row"
+msgstr "Dodaj wiersz repeatera"
+
+msgid "Remove Repeater Row"
+msgstr "Usuń wiersz repeatera"
+
+# MESSAGES
+msgid "Settings saved successfully"
+msgstr "Ustawienia zapisane pomyślnie"
+
+msgid "Error saving settings"
+msgstr "Błąd podczas zapisywania ustawień"
+
+msgid "Field deleted"
+msgstr "Pole usunięte"
+
+msgid "Group deleted"
+msgstr "Grupa usunięta"
+
+msgid "Are you sure?"
+msgstr "Jesteś pewny?"
+
+msgid "Confirm delete"
+msgstr "Potwierdź usunięcie"
+
+msgid "Loading..."
+msgstr "Ładowanie..."
+
+msgid "No fields found"
+msgstr "Nie znaleziono pól"
+
+msgid "No groups found"
+msgstr "Nie znaleziono grup"

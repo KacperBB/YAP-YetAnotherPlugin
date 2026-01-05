@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+    beStrictAboutTestsThatDoNotTestAnything="true"
+    beStrictAboutOutputDuringTests="true"
+    bootstrap="tests/bootstrap.php"
+    cacheResultFile=".phpunit.cache/test-results"
+    executionOrder="depends,defects"
+    failOnRisky="true"
+    failOnWarning="true"
+    verbose="true"
+    colors="true">
+    <testsuites>
+        <testsuite name="YAP Visual Builder Tests">
+            <file>tests/test-visual-builder.php</file>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true" pathCoverage="false">
+        <include>
+            <directory suffix=".php">includes/visual-builder.php</directory>
+            <directory suffix=".php">includes/flexible-content.php</directory>
+            <directory suffix=".php">includes/repeater.php</directory>
+        </include>
+        <report>
+            <html outputDirectory="tests/coverage" />
+            <text outputFile="php://stdout" showOnlySummary="true" />
+        </report>
+    </coverage>
+
+    <php>
+        <ini name="display_errors" value="1" />
+        <ini name="error_reporting" value="-1" />
+        <define name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib" />
+        <define name="WP_CORE_DIR" value="/tmp/wordpress" />
+        <define name="DB_NAME" value="wordpress_test" />
+        <define name="DB_USER" value="root" />
+        <define name="DB_PASSWORD" value="" />
+        <define name="DB_HOST" value="localhost" />
+        <define name="WP_DEBUG" value="true" />
+    </php>
+</phpunit>

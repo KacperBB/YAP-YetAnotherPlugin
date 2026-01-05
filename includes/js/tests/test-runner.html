@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAP Visual Builder - Test Runner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #0073aa;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-section h2 {
+            color: #0073aa;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+        
+        .test-item {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-item:hover {
+            border-color: #0073aa;
+            box-shadow: 0 2px 6px rgba(0,115,170,0.1);
+        }
+        
+        .test-item h3 {
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .test-item p {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .test-icon {
+            font-size: 16px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: #0073aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: #005a87;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,115,170,0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button.secondary {
+            background: #666;
+        }
+        
+        button.secondary:hover {
+            background: #555;
+        }
+        
+        button.success {
+            background: #46b450;
+        }
+        
+        button.success:hover {
+            background: #3a9143;
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0073aa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .info-box strong {
+            color: #0073aa;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status.ready {
+            background: #e7f3ff;
+            color: #0073aa;
+        }
+        
+        .status.running {
+            background: #fff8e7;
+            color: #b8860b;
+        }
+        
+        .status.passed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        footer {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧪 YAP Visual Builder - Test Runner</h1>
+            <p>Kompleksowe testy edycji pól w Visual Builderze</p>
+        </div>
+        
+        <!-- Info -->
+        <div class="info-box">
+            <strong>⚠️ Ważne:</strong> Otwórz Visual Builder w WordPress admin panelu w osobnej karcie, 
+            a następnie uruchamiaj testy z tej karty. Testy będą interaktywnie kontrolować Visual Builder.
+        </div>
+        
+        <!-- Basic Tests -->
+        <div class="test-section">
+            <h2>🧪 Testy Podstawowe</h2>
+            <p style="color: #666; margin-bottom: 15px; font-size: 13px;">
+                Podstawowe funkcje edycji pól w Visual Builderze
+            </p>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3><span class="test-icon">📝</span> Otwieranie Modalu</h3>
+                    <p>Test otwierania okna dialogowego edycji pola</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">✏️</span> Zmiana Nazwy Pola</h3>
+                    <p>Test zmiany nazwy pola (Field Name)</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🏷️</span> Zmiana Etykiety</h3>
+                    <p>Test zmiany etykiety (Field Label)</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">📌</span> Placeholder</h3>
+                    <p>Test zmiany tekstu podpowiedzi (Placeholder)</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">⚙️</span> Wartość Domyślna</h3>
+                    <p>Test zmiany wartości domyślnej pola</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">📖</span> Opis</h3>
+                    <p>Test zmiany opisu i instrukcji pola</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="loadAndRunBasicTests()">
+                    <span>▶️</span> Uruchom Testy Podstawowe
+                </button>
+                <button class="secondary" onclick="openVisualBuilder()">
+                    <span>🔗</span> Otwórz Visual Builder
+                </button>
+            </div>
+        </div>
+        
+        <!-- Advanced Tests -->
+        <div class="test-section">
+            <h2>🔄 Testy Zaawansowane</h2>
+            <p style="color: #666; margin-bottom: 15px; font-size: 13px;">
+                Złożone scenariusze i kombinacje opcji pól
+            </p>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3><span class="test-icon">🎨</span> Kombinacje Opcji</h3>
+                    <p>Testowanie 5 różnych kombinacji opcji podstawowych</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">⚡</span> Logika Warunkowa</h3>
+                    <p>Testy warunkowej widoczności z 6 operatorami</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🔗</span> Pola Zagnieżdżone</h3>
+                    <p>Edycja pól wewnątrz Groups i Repeaters</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">↩️</span> Modyfikacja i Przywrócenie</h3>
+                    <p>Test Save/Cancel - przywrócenie wartości</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🔤</span> Znaki Specjalne</h3>
+                    <p>Test wartości ze spacjami, HTML, znakami specjalnymi</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">💨</span> Szybkie Zmiany</h3>
+                    <p>Test sekwencyjnych zmian w szybkim tempie</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="success" onclick="loadAndRunAdvancedTests()">
+                    <span>▶️</span> Uruchom Testy Zaawansowane
+                </button>
+            </div>
+        </div>
+        
+        <!-- Field Property Tests -->
+        <div class="test-section">
+            <h2>🎯 Testy Konkretnych Właściwości</h2>
+            <div class="test-grid">
+                <div class="test-item">
+                    <h3><span class="test-icon">⭐</span> Pole Wymagane</h3>
+                    <p>Zaznaczanie/odznaczanie checkboxa wymaganego pola</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🎨</span> CSS Class</h3>
+                    <p>Dodawanie i modyfikowanie klas CSS</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">📋</span> Przełączanie Tabów</h3>
+                    <p>Test nawigacji między zakładkami Ogólne/Zaawansowane/Warunki</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🔐</span> Walidacja Nazwy</h3>
+                    <p>Testowanie poprawności nazwy pola (a-z, 0-9, _)</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">🗑️</span> Zamknięcie Modalu</h3>
+                    <p>Test ESC, klikniecie overlay, przycisk Cancel</p>
+                </div>
+                <div class="test-item">
+                    <h3><span class="test-icon">💾</span> Persystencja</h3>
+                    <p>Weryfikacja, że zmiany się zapisują</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="runSpecificTest('testChangeFieldName')">
+                    Zmiana Nazwy
+                </button>
+                <button onclick="runSpecificTest('testChangeFieldLabel')">
+                    Zmiana Etykiety
+                </button>
+                <button onclick="runSpecificTest('testToggleRequired')">
+                    Pole Wymagane
+                </button>
+                <button onclick="runSpecificTest('testChangeCSSOClass')">
+                    CSS Class
+                </button>
+                <button onclick="runSpecificTest('testSaveAndClose')">
+                    Save & Close
+                </button>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="test-section">
+            <h2>📚 Instrukcje Użytkowania</h2>
+            
+            <h3 style="color: #0073aa; font-size: 14px; margin-top: 15px; margin-bottom: 8px;">1️⃣ Przygotowanie</h3>
+            <div class="code-block">
+1. Otwórz WordPress Admin Panel
+2. Przejdź do: Dashboard → Page Builder (YAP)
+3. Otwórz lub stwórz schematem pola
+4. Powróć do tej karty przeglądarki
+            </div>
+            
+            <h3 style="color: #0073aa; font-size: 14px; margin-top: 15px; margin-bottom: 8px;">2️⃣ Uruchomienie Testów</h3>
+            <div class="code-block">
+Opcja A: Kliknij przycisk "Uruchom Testy"
+Opcja B: Otwórz DevTools (F12) → Console i wpisz:
+  - YAPBuilderTests.runAll()
+  - YAPAdvancedTests.runAll()
+            </div>
+            
+            <h3 style="color: #0073aa; font-size: 14px; margin-top: 15px; margin-bottom: 8px;">3️⃣ Czytanie Wyników</h3>
+            <div class="code-block">
+✅ Zielony - Test przeszedł
+❌ Czerwony - Test nie przeszedł
+🧪 Niebieski - Informacja testowa
+ℹ️ Szary - Informacja dodatkowo
+            </div>
+            
+            <h3 style="color: #0073aa; font-size: 14px; margin-top: 15px; margin-bottom: 8px;">4️⃣ Debugowanie</h3>
+            <p style="color: #666; font-size: 13px; line-height: 1.6;">
+                Jeśli test się nie powiedzie, sprawdź w DevTools → Console:
+            </p>
+            <div class="code-block">
+• Czy modal się otwiera?
+• Czy elementy formularza są znalezione?
+• Czy eventy uruchamiają się?
+• Czy wartości się aktualizują?
+            </div>
+        </div>
+        
+        <!-- Console Output -->
+        <div class="test-section">
+            <h2>📟 Wyjście Konsoli</h2>
+            <div id="console-output" style="
+                background: #1e1e1e;
+                color: #d4d4d4;
+                padding: 15px;
+                border-radius: 6px;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                max-height: 400px;
+                overflow-y: auto;
+                line-height: 1.4;
+            ">
+                <div style="color: #6a9955;">// Konsola testów pojawia się tutaj</div>
+                <div style="color: #808080;">Otwórz DevTools (F12) aby zobaczyć pełne logi</div>
+            </div>
+            <button style="margin-top: 10px;" onclick="clearConsole()">
+                🗑️ Wyczyść Konsolę
+            </button>
+        </div>
+        
+        <!-- Footer -->
+        <footer>
+            <p>🧪 YAP Visual Builder Test Suite v1.0</p>
+            <p>Testy dla YetAnotherPlugin Visual Builder</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Pobierz i uruchom testy podstawowe
+        function loadAndRunBasicTests() {
+            // Sprawdź czy Visual Builder jest dostępny
+            if (typeof window.opener === 'object' && window.opener !== null) {
+                const vbWindow = window.opener;
+                if (typeof vbWindow.YAPBuilderTests !== 'undefined') {
+                    vbWindow.YAPBuilderTests.runAll();
+                    alert('✅ Testy podstawowe uruchomione w Visual Builderze');
+                    return;
+                }
+            }
+            
+            // Jeśli nie ma okna nadrzędnego, ładuj testy w tej karcie
+            loadTestFile('visual-builder-field-editing.test.js');
+            alert('ℹ️ Ładuję testy... Otwórz DevTools (F12) i zobacz Console');
+        }
+        
+        // Pobierz i uruchom testy zaawansowane
+        function loadAndRunAdvancedTests() {
+            if (typeof window.opener === 'object' && window.opener !== null) {
+                const vbWindow = window.opener;
+                if (typeof vbWindow.YAPAdvancedTests !== 'undefined') {
+                    vbWindow.YAPAdvancedTests.runAll();
+                    alert('✅ Testy zaawansowane uruchomione w Visual Builderze');
+                    return;
+                }
+            }
+            
+            loadTestFile('visual-builder-advanced.test.js');
+            alert('ℹ️ Ładuję testy... Otwórz DevTools (F12) i zobacz Console');
+        }
+        
+        // Załaduj plik testowy
+        function loadTestFile(filename) {
+            const script = document.createElement('script');
+            script.src = `../tests/${filename}`;
+            document.head.appendChild(script);
+            
+            setTimeout(() => {
+                if (filename.includes('field-editing')) {
+                    if (typeof YAPBuilderTests !== 'undefined') {
+                        YAPBuilderTests.runAll();
+                    }
+                } else if (filename.includes('advanced')) {
+                    if (typeof YAPAdvancedTests !== 'undefined') {
+                        YAPAdvancedTests.runAll();
+                    }
+                }
+            }, 500);
+        }
+        
+        // Uruchom konkretny test
+        function runSpecificTest(testName) {
+            if (typeof YAPBuilderTests !== 'undefined' && typeof YAPBuilderTests[testName] === 'function') {
+                console.clear();
+                console.log(`▶️ Uruchamianie: ${testName}`);
+                YAPBuilderTests[testName]();
+            } else {
+                alert('Test niedostępny. Ładuję testy...');
+                loadTestFile('visual-builder-field-editing.test.js');
+            }
+        }
+        
+        // Wyczyść konsolę
+        function clearConsole() {
+            document.getElementById('console-output').innerHTML = 
+                '<div style="color: #6a9955;">// Konsola wyczyszczona</div>';
+            console.clear();
+        }
+        
+        // Otwórz Visual Builder
+        function openVisualBuilder() {
+            // Spróbuj znaleźć URL Visual Buildera
+            const adminUrl = '/wp-admin/';
+            const vbUrl = adminUrl + '?page=yap-builder';
+            window.open(vbUrl, 'visual-builder', 'width=1400,height=900');
+        }
+        
+        // Inicjalizacja - ładuj testy przy załadowaniu strony
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload test files
+            ['visual-builder-field-editing.test.js', 'visual-builder-advanced.test.js'].forEach(file => {
+                const script = document.createElement('script');
+                script.src = `../tests/${file}`;
+                script.async = true;
+                document.head.appendChild(script);
+            });
+        });
+        
+        // Przechwyć console.log i wyświetl w UI
+        const originalLog = console.log;
+        const outputDiv = document.getElementById('console-output');
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            
+            const message = args.map(arg => {
+                if (typeof arg === 'object') {
+                    return JSON.stringify(arg, null, 2);
+                }
+                return String(arg);
+            }).join(' ');
+            
+            const line = document.createElement('div');
+            line.textContent = message;
+            line.style.wordBreak = 'break-word';
+            
+            outputDiv.appendChild(line);
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+🧪 INSTRUKCJA: Jak Uruchomić Testy
+
+================================================
+
+❌ PROBLEM: YAPBuilderTests is not defined
+
+✅ ROZWIĄZANIE:
+
+1. Otwórz Visual Builder:
+   WordPress Admin → YetAnotherPlugin → 🎨 Visual Builder
+
+2. Poczekaj aż strona się załaduje (1-2 sekundy)
+
+3. Otwórz DevTools:
+   Naciśnij: F12
+
+4. Przejdź do Console:
+   Kliknij: Console tab
+
+5. Uruchom testy:
+   Wpisz i naciśnij Enter:
+   
+   YAPBuilderTests.runAll()
+
+================================================
+
+🔄 ALTERNATYWA - Auto-loader:
+
+Jeśli testy nie są załadowane, wklej to w console:
+
+(function() {
+    const files = [
+        'test-config.js',
+        'visual-builder-field-editing.test.js',
+        'visual-builder-advanced.test.js'
+    ];
+    
+    const url = '/wp-content/plugins/YetAnotherPlugin/includes/js/tests/';
+    let loaded = 0;
+    
+    files.forEach((file, i) => {
+        const script = document.createElement('script');
+        script.src = url + file;
+        script.onload = () => {
+            console.log('✅ Loaded:', file);
+            if (++loaded === files.length) {
+                console.log('✨ Ready! Run: YAPBuilderTests.runAll()');
+            }
+        };
+        setTimeout(() => document.head.appendChild(script), i * 100);
+    });
+})();
+
+================================================
+
+📋 POLECENIA:
+
+Po załadowaniu testów:
+
+// Uruchom wszystkie podstawowe testy
+YAPBuilderTests.runAll()
+
+// Uruchom zaawansowane testy
+YAPAdvancedTests.runAll()
+
+// Konkretny test
+YAPBuilderTests.testChangeFieldName()
+
+// Zaawansowany scenariusz
+YAPAdvancedTests.testBasicCombinations()
+
+================================================
+
+💡 WSKAZÓWKI:
+
+• Testy załadują się automatycznie w Visual Builderze
+• Czekaj aż się załadują (zajmuje ~1 sekuntę)
+• Jeśli testy się nie ładują → użyj auto-loadera powyżej
+• Sprawdzaj Console (F12) czy widać logi
+
+================================================
+
+✨ GOTOWE!
+
+Powinno działać teraz 🚀

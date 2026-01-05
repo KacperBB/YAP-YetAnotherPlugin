@@ -1,0 +1,107 @@
+🔧 ROZWIĄZANIE: Poprawna Ścieżka do Testów
+
+================================================
+
+❌ PROBLEM:
+404 Not Found - Skrypty testów nie mogły być załadowane
+
+✅ PRZYCZYNĄ:
+URL był bez /fagpress/ - złe wygenerowanie ścieżki
+
+✅ ROZWIĄZANIE:
+
+Wklej TEGO w Console (F12) i naciśnij Enter:
+
+================================================
+
+(function() {
+    const testFiles = [
+        'test-config.js',
+        'visual-builder-field-editing.test.js',
+        'visual-builder-advanced.test.js'
+    ];
+    
+    const url = '/fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/';
+    let loaded = 0;
+    
+    testFiles.forEach((file, i) => {
+        const script = document.createElement('script');
+        script.src = url + file;
+        script.async = false;
+        
+        script.onload = () => {
+            console.log('✅ Loaded:', file);
+            if (++loaded === testFiles.length) {
+                console.log('%c✨ Ready! Run: YAPBuilderTests.runAll()', 'color: #46b450; font-weight: bold;');
+            }
+        };
+        
+        script.onerror = () => {
+            console.error('❌ Failed to load:', url + file);
+        };
+        
+        setTimeout(() => document.head.appendChild(script), i * 100);
+    });
+})();
+
+================================================
+
+🎯 KROKI:
+
+1. Otwórz Visual Builder:
+   WordPress Admin → YetAnotherPlugin → Visual Builder
+
+2. Otwórz DevTools:
+   F12
+
+3. Przejdź do Console:
+   Kliknij: Console tab
+
+4. Wklej kod powyżej i naciśnij Enter
+
+5. Czekaj ~2 sekundy na załadowanie
+
+6. Wpisz i naciśnij Enter:
+   YAPBuilderTests.runAll()
+
+================================================
+
+✅ OCZEKIWANE WYNIKI:
+
+✅ Loaded: test-config.js
+✅ Loaded: visual-builder-field-editing.test.js
+✅ Loaded: visual-builder-advanced.test.js
+✨ Ready! Run: YAPBuilderTests.runAll()
+
+================================================
+
+📊 TESTY:
+
+Po załadowaniu możesz uruchomić:
+
+YAPBuilderTests.runAll()           // 15 testów
+YAPAdvancedTests.runAll()          // 6 scenariuszy
+YAPBuilderTests.testChangeFieldName()
+YAPAdvancedTests.testBasicCombinations()
+
+================================================
+
+💡 JEŚLI WCIĄŻ BŁĄD 404:
+
+1. Sprawdź czy plik istnieje:
+   /fagpress/wp-content/plugins/YetAnotherPlugin/includes/js/tests/test-config.js
+
+2. Sprawdzaj Network tab (F12 → Network)
+   - Jakie status kody zwracają?
+   - Czy są 404?
+   - Czy inne błędy?
+
+3. Sprawdzaj Console:
+   - Czy jQuery jest załadowany?
+   - Czy są JS errors?
+
+================================================
+
+✨ GOTOWE!
+
+Teraz powinno działać 🚀

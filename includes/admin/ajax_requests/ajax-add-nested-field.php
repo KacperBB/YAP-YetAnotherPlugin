@@ -31,7 +31,7 @@ function yap_add_nested_field_ajax() {
     }
 
     // Sprawdzenie tabeli
-    $check_table = $wpdb->get_var("SHOW TABLES LIKE '{$nested_table_name}'");
+    $check_table = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $nested_table_name));
     if (!$check_table) {
         error_log("🚨 ERROR: Tabela {$nested_table_name} nie istnieje.");
         wp_send_json_error("Table does not exist.");
@@ -54,7 +54,7 @@ function yap_add_nested_field_ajax() {
     $result = $wpdb->insert(
         $nested_table_name,
         [
-            'generated_name' => 'field_' . time(),
+            'generated_name' => 'field_' . uniqid('', true),
             'user_name' => $field_name,
             'field_type' => $field_type,
             'field_value' => $field_value,

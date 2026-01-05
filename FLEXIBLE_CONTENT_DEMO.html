@@ -1,0 +1,323 @@
+/**
+ * Flexible Content Visual Demo
+ * Test page showing all improvements
+ */
+
+<!-- IMPROVED MODAL -->
+
+<div id="yap-flexible-layouts-modal" class="improved">
+    <div class="yap-modal-overlay">
+        <div class="yap-modal-content">
+            
+            <!-- Header with gradient -->
+            <div class="yap-modal-header">
+                <h2>🎨 Zarządzanie Layoutami Flexible Content</h2>
+                <button class="yap-close-modal">&times;</button>
+            </div>
+            
+            <!-- Body -->
+            <div class="yap-modal-body">
+                
+                <!-- Info Box -->
+                <div class="yap-info-box">
+                    <p><strong>ℹ️ Co to są Layouty?</strong></p>
+                    <p>Layouty to różne typy sekcji, które użytkownik może dodawać do strony.</p>
+                </div>
+                
+                <!-- Add New Layout Section -->
+                <div class="yap-add-layout-section">
+                    <h3>➕ Dodaj nowy layout</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px;">
+                        <!-- Label Input (Pierwszy) -->
+                        <div>
+                            <label><strong>Label (nazwa wyświetlana):</strong></label>
+                            <input type="text" 
+                                   id="yap-new-layout-label" 
+                                   placeholder="np. Hero Section"
+                                   value="Hero Section">
+                            <small>👆 Wpisz nazwę layoutu</small>
+                        </div>
+                        
+                        <!-- Slug Input (Automatyczne) -->
+                        <div>
+                            <label><strong>Slug (automatyczny):</strong></label>
+                            <input type="text" 
+                                   id="yap-new-layout-name" 
+                                   placeholder="auto-generowany"
+                                   value="hero_section"
+                                   readonly>
+                            <small>🔒 Generowany automatycznie</small>
+                        </div>
+                        
+                        <!-- Add Button -->
+                        <div>
+                            <button class="button button-primary yap-add-layout-button">
+                                ➕ Dodaj Layout
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 12px; padding: 10px; background: #f0f6fc; border-radius: 4px;">
+                        <strong>Jak działa:</strong> Wpisz Label, a Slug wygeneruje się automatycznie!
+                    </p>
+                </div>
+                
+                <!-- Existing Layouts -->
+                <div class="yap-layouts-list">
+                    <h3>📋 Istniejące Layouty:</h3>
+                    
+                    <!-- Layout Item 1 -->
+                    <div class="yap-layout-item" data-layout-name="hero_section">
+                        <div class="yap-layout-header">
+                            <div>
+                                <strong class="yap-layout-label">Hero Section</strong>
+                                <code class="yap-layout-name">hero_section</code>
+                            </div>
+                            <div>
+                                <button class="button button-small yap-add-layout-field">➕ Dodaj pole</button>
+                                <button class="button button-small yap-remove-layout">🗑️ Usuń</button>
+                            </div>
+                        </div>
+                        
+                        <div class="yap-layout-fields">
+                            <!-- Field 1 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="title" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Tytuł sekcji" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>text</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" value="Wpisz tytuł" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                            
+                            <!-- Field 2 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="description" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Opis" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>textarea</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" value="Wpisz opis" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                            
+                            <!-- Field 3 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="image" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Obraz tła" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>image</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Layout Item 2 -->
+                    <div class="yap-layout-item" data-layout-name="columns_3">
+                        <div class="yap-layout-header">
+                            <div>
+                                <strong class="yap-layout-label">3 Kolumny</strong>
+                                <code class="yap-layout-name">columns_3</code>
+                            </div>
+                            <div>
+                                <button class="button button-small yap-add-layout-field">➕ Dodaj pole</button>
+                                <button class="button button-small yap-remove-layout">🗑️ Usuń</button>
+                            </div>
+                        </div>
+                        
+                        <div class="yap-layout-fields">
+                            <!-- Field 1 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="col_1_title" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Kolumna 1 Tytuł" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>text</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                            
+                            <!-- Field 2 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="col_2_title" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Kolumna 2 Tytuł" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>text</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                            
+                            <!-- Field 3 -->
+                            <div class="yap-layout-field">
+                                <input type="text" class="yap-field-name" value="col_3_title" placeholder="Nazwa pola">
+                                <input type="text" class="yap-field-label" value="Kolumna 3 Tytuł" placeholder="Label">
+                                <select class="yap-field-type">
+                                    <option selected>text</option>
+                                </select>
+                                <input type="text" class="yap-field-placeholder" placeholder="Placeholder">
+                                <button class="button button-small yap-remove-field">✕ Usuń</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="yap-modal-footer">
+                <button class="button yap-close-modal">Zamknij</button>
+                <button class="button button-primary yap-save-layouts">💾 Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FLEXIBLE CONTENT IN POST EDITOR -->
+
+<div class="flexible-content-demo">
+    <h2>📄 Post Editor - Flexible Content Field</h2>
+    
+    <!-- Section 1 -->
+    <div class="yap-flexible-section" style="margin-bottom: 16px;">
+        <div class="yap-flexible-section-header">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="dashicons dashicons-menu">☰</span>
+                <div>
+                    <strong style="color: #0073aa;">Hero Section</strong>
+                    <code>hero_section</code>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="button button-small">−</button>
+                <button class="button button-small">📋</button>
+                <button class="button button-small" style="background: #dc3232; color: white;">✕</button>
+            </div>
+        </div>
+        
+        <div class="yap-flexible-section-fields">
+            <div style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <label style="color: #0073aa; font-weight: 600;">Tytuł sekcji</label>
+                <input type="text" placeholder="Welcome to our website" style="width: 100%; padding: 8px; margin-top: 6px;">
+            </div>
+            
+            <div style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <label style="color: #0073aa; font-weight: 600;">Opis</label>
+                <textarea placeholder="This is a great place to tell your story" style="width: 100%; padding: 8px; margin-top: 6px;"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Section 2 -->
+    <div class="yap-flexible-section">
+        <div class="yap-flexible-section-header">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="dashicons dashicons-menu">☰</span>
+                <div>
+                    <strong style="color: #0073aa;">3 Kolumny</strong>
+                    <code>columns_3</code>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="button button-small">−</button>
+                <button class="button button-small">📋</button>
+                <button class="button button-small" style="background: #dc3232; color: white;">✕</button>
+            </div>
+        </div>
+        
+        <div class="yap-flexible-section-fields">
+            <div style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <label style="color: #0073aa; font-weight: 600;">Kolumna 1 Tytuł</label>
+                <input type="text" placeholder="Feature 1" style="width: 100%; padding: 8px; margin-top: 6px;">
+            </div>
+            
+            <div style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <label style="color: #0073aa; font-weight: 600;">Kolumna 2 Tytuł</label>
+                <input type="text" placeholder="Feature 2" style="width: 100%; padding: 8px; margin-top: 6px;">
+            </div>
+            
+            <div style="padding: 12px; background: white; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <label style="color: #0073aa; font-weight: 600;">Kolumna 3 Tytuł</label>
+                <input type="text" placeholder="Feature 3" style="width: 100%; padding: 8px; margin-top: 6px;">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Buttons -->
+    <div class="yap-flexible-actions">
+        <button class="button button-primary" style="background: #0073aa; color: white; margin-right: 8px;">➕ Hero Section</button>
+        <button class="button button-primary" style="background: #0073aa; color: white;">➕ 3 Kolumny</button>
+    </div>
+</div>
+
+<style>
+/* Demo Styling */
+.flexible-content-demo {
+    max-width: 800px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.flexible-content-demo h2 {
+    margin-top: 0;
+    color: #0073aa;
+}
+
+/* Show all key improvements */
+.improvements-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.improvements-list h3 {
+    color: #0073aa;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 10px;
+}
+
+.improvements-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.improvements-list li:last-child {
+    border-bottom: none;
+}
+</style>
+
+<div class="improvements-list">
+    <h3>✨ Kluczowe Ulepszenia:</h3>
+    <ul>
+        <li>✅ <strong>Auto-Slug Generation</strong> - Label → Slug (hero section → hero_section)</li>
+        <li>✅ <strong>Label + Slug Display</strong> - Obie wartości wyświetlane dla czytelności</li>
+        <li>✅ <strong>Modern Gradients</strong> - Niebieski gradient background, smooth shadows</li>
+        <li>✅ <strong>Improved Buttons</strong> - Styled z gradients i hover effects</li>
+        <li>✅ <strong>Better Field Layout</strong> - Grid layout z responsive design</li>
+        <li>✅ <strong>Smooth Animations</strong> - 200-300ms transitions na wszystkich interakcjach</li>
+        <li>✅ <strong>Enhanced Validation</strong> - Real-time slug generation, client-side checks</li>
+        <li>✅ <strong>Mobile Responsive</strong> - Full-width on tablets/mobile</li>
+    </ul>
+</div>
+
+<!-- USAGE EXAMPLE -->
+
+<div class="improvements-list">
+    <h3>🎯 Jak Używać:</h3>
+    <ol style="padding-left: 20px;">
+        <li>Otworz Visual Builder → Edytuj grupę</li>
+        <li>Kliknij "Zarządzaj layoutami" (Flexible Content field)</li>
+        <li>Wpisz <code>Label</code> (np. "Hero Section")</li>
+        <li><code>Slug</code> wygeneruje się automatycznie ✅</li>
+        <li>Kliknij <code>➕ Dodaj Layout</code></li>
+        <li>Dodaj pola do layoutu (click "➕ Dodaj pole")</li>
+        <li>Kliknij <code>💾 Zapisz</code></li>
+        <li>Teraz możesz dodawać sekcje w post edytorze! 🎉</li>
+    </ol>
+</div>
